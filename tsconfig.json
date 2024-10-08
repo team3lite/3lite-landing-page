@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    // "paths": {
+    //   // Add paths for import aliases
+    //   "@components/*": ["app/components/*"],
+    //   "@pages/*": ["app/pages/*"]
+    // }
+    "paths": {
+      // Add paths for import aliases
+      "@/*": ["./app/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "app/components/FaqItem.jsx",
+    "app/components/FaqSection.jsx",
+    "app/components/FeaturesCard.jsx",
+    "app/components/FeaturesShadowCard.jsx",
+    "app/components/HeaderComponent.jsx",
+    "app/pages/Homepage.jsx",
+    "app/components/BottomColor.jsx"
+, "app/(auth)/layout.jsx", "app/(auth)/_components/AuthMattedBackground.jsx", "app/components/ChatList.jsx","app/components/ChatNavs.jsx"  ],
+  "exclude": ["node_modules"]
+}
