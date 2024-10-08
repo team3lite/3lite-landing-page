@@ -1,7 +1,5 @@
 import bcrypt from "bcrypt";
 import mongoose, { Model } from "mongoose";
-import passport from "passport";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import validator from "validator";
 
 export interface Users extends Document {
