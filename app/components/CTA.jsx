@@ -6,7 +6,7 @@ import Header from "./Header";
 
 const CTA = () => {
     return (
-        <section className='w-full md:mt-64'>
+        <section className='w-full mt-10 md:mt-64'>
             <div className="relative w-full flex flex-col items-center justify-center space-y-3 px-5">
 
                 <div className="absolute left-0">
