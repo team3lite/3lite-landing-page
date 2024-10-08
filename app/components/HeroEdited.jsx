@@ -26,7 +26,7 @@ const HeroEdited = () => {
                 className="bg-gradient-to-b from-[#FFFFFF] to-slate-600 bg-clip-text text-5xl max-w-[90%] min-w-[300px] sm:text-6xl  lg:text-[80px] lg:leading-[84px]  font-Syne font-normal text-center capitalize "
               >
                 <h1>
-                  Secure Messaging for the Decentralized Future
+                  Secure Messaging for the <br className="hidden md:block" /> Decentralized Future
                 </h1>
               </div>
 
