@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "3lite Messenger",
-  description: "Secure Messaging for the Decentralized Future",
+  title: "Suift",
+  description: "Suift is a social media app built on the SUI Network",
 };
 
 export default function RootLayout({ children }) {
@@ -41,9 +42,10 @@ export default function RootLayout({ children }) {
         ></link>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable}  w-screen overflow-x-hidden antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} w-screen overflow-x-hidden antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );
