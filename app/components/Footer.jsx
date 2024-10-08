@@ -30,15 +30,17 @@ const Footer = () => {
   ];
 
   return (
-    <footer className=" w-screen overflow-hidden relative mt-[100px]  sm:mt-0 sm:pt-40 pb-10 sm:pb-20 bg-brand">
-      <div className="lg:p-[120px]  sm:p-[80px] p-[30px] lg:pb-[0px] pb-[0px] w-full border-t border-gray-500">
+    <footer className=" w-screen overflow-hidden relative mt-[100px]  sm:mt-40">
+      <div className="lg:p-[120px]  sm:p-[80px] p-[30px] lg:pb-[0px] pb-[0px] w-full">
         <div className="Frame47433 w-full   gap-y-[40px] grid grid-cols-12">
-          <div className="lg:col-[1/3] flex justify-center items-start col-span-6">
-            <div className="flex items-center">
-              <div className=" h-[41px] md:h-[51px]">
-                <Image src={logo} className="w-full h-full" alt="logo" />
-              </div>
-              <span className="text-lg font-semibold">3lite Messenger</span>
+          <div className="lg:col-[1/3] flex justify-center items-start   col-span-6">
+            <div className="w-[100px] relative">
+              <Image
+                src="/general/logo.jpg"
+                fill
+                className="w-full h-full"
+                alt="logo"
+              />
             </div>
           </div>
           <div className=" justify-center  col-span-6 lg:col-[3/8] bg-ed-300 font-syne  items-start flex">
@@ -69,7 +71,7 @@ const Footer = () => {
                   }}
                   className="bg-gradient-to-b from-[#FFFFFF] to-slate-600 bg-clip-text    mx-auto text-center flex justify-center  font-Syne w-full font-semibold text-2xl sm:text-3xl "
                 >
-                  <h1>Join the 3lite </h1>
+                  <h1>Join the Suift </h1>
                 </div>
 
                 <div className="Community self-stretch text-white text-2xl sm:text-3xl  font-semibold font-['Tomato Grotesk']">
@@ -84,9 +86,13 @@ const Footer = () => {
                 />
 
                 <div className="shrink-0 bg-gradient-to-b hover:bg-gradient-to-t hover:pb-[1px] active:p-[0.4px] rounded-full from-[#77679F] to-[rgba(119,103,159,0)] pt-[1px] px-[1px]">
-                  <div className="rounded-full  overflow-hidden bg-[#070322] ">
+                  <div className="rounded-full bg-background">
                     <button
-                      className="bg-white text-brand font-syne  h-[50px]    p-[10px_15px] sm:p-[10px_35px] rounded-[0] sm:rounded-full font-normal sm:text-lg text-sm   "
+                      style={{
+                        background:
+                          "conic-gradient(from 270deg at 50% 50%, #140F2A 0deg, rgba(100, 67, 194, 0.25) 58.25deg, rgba(71, 47, 140, 0.10) 290deg)",
+                      }}
+                      className="font-syne  h-[50px]    p-[10px_15px] sm:p-[10px_35px] rounded-[0] sm:rounded-full text-white font-normal sm:text-lg text-sm   "
                     >
                       Join us
                     </button>
@@ -102,12 +108,43 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className=" w-full overflow-hidden h-[400px] bg-emeald-200 relative">
+        <MainOverlay />
+        <ColoredBottom />
+      </div>
     </footer>
   );
 };
 
 export default Footer;
 
+const ColoredBottom = () => {
+  return (
+    <div className="absolute w-full overflow-hidden -top-[350px]  left-0 flex justify-center">
+      <div className="w-fit ">
+        <BottomColor />
+      </div>
+    </div>
+  );
+};
+
+const MainOverlay = () => {
+  return (
+    <div className="absolute  z-[10] w-full -top-[00px] left-0 flex justify-center">
+      <div className="w-fit">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1610"
+          height="759"
+          fill="none"
+          viewBox="0 0 1610 759"
+        >
+          <path fill="#070322" d="M0 0 A1700 1610 0 0 0 1610 0 Z" />
+        </svg>
+      </div>
+    </div>
+  );
+};
 
 const Instagram = () => {
   return (
