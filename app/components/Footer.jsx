@@ -27,6 +27,10 @@ const Footer = () => {
       title: "FAQ",
       href: "#",
     },
+    {
+      title: "Privacy Policy",
+      href: "/privacy",
+    },
   ];
 
   return (

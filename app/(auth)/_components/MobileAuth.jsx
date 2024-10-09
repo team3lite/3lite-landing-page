@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { AppleLogo, GoogleLogo } from "../login/page";
 import { AccMessage } from "./AuthMessage";
+import GoogleButton from "./GoogleButton";
 import Link from "next/link";
 import logo from "@/assets/images/logo.svg";
 import { cn } from "@/lib/utils";
@@ -53,9 +54,11 @@ const MobileAuth = ({ children }) => {
           </div>
         </div>
         <div className="self-stretch justify-center items-center gap-[13px] inline-flex">
-          <div className="w-12 bg-opacity-20 place-content-center place-items-center flex h-12 relative bg-white rounded-[27.27px]">
-            <GoogleLogo />
-          </div>
+          <GoogleButton>
+            <div className="w-12 bg-opacity-20 place-content-center place-items-center flex h-12 relative bg-white rounded-[27.27px]">
+              <GoogleLogo />
+            </div>
+          </GoogleButton>
           <div className="w-12 bg-opacity-20 place-content-center place-items-center flex h-12 relative bg-white rounded-[27.27px]">
             <AppleLogo />
           </div>

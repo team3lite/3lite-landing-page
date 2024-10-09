@@ -54,14 +54,14 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="md:hidden h-[700px]">
+        <div className="md:hidden ">
           <Sheet>
             <SheetTrigger asChild>
               <Menu className="stroke-white" />
             </SheetTrigger>
 
             <SheetContent className=" bg-[#231c4f] flex flex-col pb-3 text-white text-base   h-full shadow-lg border-0  ">
-              <SheetHeader className="h-fit ">
+              <SheetHeader className="h">
                 <SheetTitle>
                   <div className="w-full  flex justify-center">
                     <Image
