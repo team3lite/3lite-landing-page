@@ -54,7 +54,7 @@ const page = () => {
                 <div className="flex justify-between items-start mb-6">
                   <div>
                     <h1 className="text-2xl font-bold text-white mb-1">
-                      CryptoWizard.3Lite
+                      SparkleJosh.3Lite
                     </h1>
                     <p className="text-blue-400 text-sm">Bio</p>
                   </div>
