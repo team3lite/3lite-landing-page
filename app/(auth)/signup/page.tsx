@@ -156,7 +156,7 @@ const Page = () => {
           OR
         </div>
         <div className=" w-full  flex-col justify-center items-center gap-3 flex">
-          <GradientButton onClick={() => {}} text="Continue with Apple">
+          <GradientButton onClick={() => {}} text="Continue with Solana">
             <div className="size-5">
               <SolLogo />
             </div>
