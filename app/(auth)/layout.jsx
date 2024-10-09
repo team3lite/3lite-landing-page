@@ -17,7 +17,7 @@ const layout = ({ children }) => {
               </div>
               <div className="absolute top-20 z-[5]">
                 <Image
-                  src={logo}
+                  src="/general/3Lite.png"
                   className="h-[480px] w-auto"
                   width={302}
                   height={601}
