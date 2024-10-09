@@ -4,7 +4,7 @@ import MobileAuth from "./_components/MobileAuth";
 import AuthMessage from "./_components/AuthMessage";
 import Navbar from "@/components/Navbar";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-
+import logo from "../assets/images/logo.svg";
 const layout = ({ children }) => {
   return (
     <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
@@ -17,7 +17,7 @@ const layout = ({ children }) => {
               </div>
               <div className="absolute top-20 z-[5]">
                 <Image
-                  src="/general/3Lite.png"
+                  src={logo}
                   className="h-[480px] w-auto"
                   width={302}
                   height={601}

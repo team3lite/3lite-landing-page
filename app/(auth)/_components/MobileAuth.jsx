@@ -4,7 +4,9 @@ import Image from "next/image";
 import { AppleLogo, GoogleLogo } from "../login/page";
 import { AccMessage } from "./AuthMessage";
 import Link from "next/link";
+import logo from "@/assets/images/logo.svg";
 import { cn } from "@/lib/utils";
+import { SolLogo } from "@/components/SolLogo";
 const MobileAuth = ({ children }) => {
   return (
     <div className="w-full h-[735px] pt-[23px] bg-[#333747] flex-col justify-start items-center gap-1.5 inline-flex">
@@ -18,7 +20,7 @@ const MobileAuth = ({ children }) => {
       </div>
       <div className="self-stretch h-[682px] px-6 py-9 bg-[#070322] rounded-tl-[20px] rounded-tr-[20px] flex-col justify-start items-center gap-7 flex">
         <Image
-          src="/general/logo.png"
+          src={logo}
           width={113}
           height={155}
           className="w-[65px]"
@@ -57,8 +59,8 @@ const MobileAuth = ({ children }) => {
           <div className="w-12 bg-opacity-20 place-content-center place-items-center flex h-12 relative bg-white rounded-[27.27px]">
             <AppleLogo />
           </div>
-          <div className="w-12 h-12 relative  bg-opacity-20 bg-white rounded-[27.27px] border border-[#515978]">
-            <SuiLogo className="p-2" />
+          <div className="w-12 h-12 p-3 relative  bg-opacity-20 bg-white rounded-[27.27px] border border-[#515978]">
+            <SolLogo className="p-2" />
           </div>
         </div>
         <AccMessage />
