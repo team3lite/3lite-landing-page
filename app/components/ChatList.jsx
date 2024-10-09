@@ -6,7 +6,7 @@ const ChatList = () => {
   const [chats, setChats] = useState([
     {
       id: 1,
-      message: "Welcome to Suift Messenger",
+      message: "Welcome to 3lite Messenger",
       time: "12:34 PM",
       type: "received",
     },
@@ -27,7 +27,7 @@ const ChatList = () => {
       id: 4,
       type: "sent",
       message:
-        "Suif Messenger is a decentralized chat application built on the Sui blockchain",
+        "3lite Messenger is a decentralized chat application built on the Sui blockchain",
       time: "12:34 PM",
     },
     {
