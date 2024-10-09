@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "3lite",
-  description: "3lite is a social media app built on the SUI Network",
+  title: "3Lite",
+  description: "3Lite is a social media app built on the SUI Network",
 };
 
 export default function RootLayout({ children }) {
