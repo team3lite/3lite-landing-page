@@ -26,15 +26,16 @@ export const navLinks = [
     link: "#features",
     icon: Layers,
   },
-  {
-    name: "Reviews",
-    link: "#reviews",
-    icon: MessageCircle,
-  },
+
   {
     name: "Chat",
     link: "/chat",
     icon: Binoculars,
+  },
+  {
+    name: "Join Community",
+    link: "#joincommunity",
+    icon: MessageCircle,
   },
   {
     name: "Login",
