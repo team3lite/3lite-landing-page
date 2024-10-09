@@ -125,7 +125,7 @@ const Page = () => {
                   type="email"
                   name="email_signup"
                   id="email_signup"
-                  placeholder="team3elite@gmail.com"
+                  placeholder="team3Lite@gmail.com"
                   className="bg-transparent"
                 />
               </div>

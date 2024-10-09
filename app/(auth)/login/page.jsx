@@ -122,7 +122,7 @@ const Page = () => {
                   type="email"
                   id="email_signin"
                   name="email_signin"
-                  placeholder="team3elite@gmail.com"
+                  placeholder="team3Lite@gmail.com"
                   className="bg-transparent"
                 />
               </div>
@@ -203,7 +203,7 @@ const Page = () => {
             <input
               type="email"
               id="email_signin_mob"
-              placeholder="team3elite@gmail.com"
+              placeholder="team3Lite@gmail.com"
               className="bg-transparent text-white border-none  outline-none no-underline"
             />
             <CircleCheck size={24} className="text-white  fill-[#038654]" />
