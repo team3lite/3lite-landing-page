@@ -18,6 +18,8 @@ import {
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { WalletModalButton } from "@solana/wallet-adapter-react-ui";
+
 
 const Page = () => {
   const [loggingIn, setLoggingIn] = useState(false);
@@ -164,10 +166,21 @@ const Page = () => {
           OR
         </div>
         <div className=" w-full  flex-col justify-center items-center gap-3 flex">
-          <GradientButton text="Continue with Solana">
-            <div className="size-5">
-              <SolLogo />
-            </div>
+          <GradientButton>
+              {/* <SolLogo />  */}
+              <WalletModalButton style={
+            {
+              "backgroundColor":"transparent",
+              "width":"100%",
+              "position":"relative",
+              "right":"0",
+              "fontWeight":"400",
+              "font-size":"14px"
+
+            }
+          } startIcon={<SolLogo/>} children={"Continue with Solana"}/>
+               
+          
           </GradientButton>
           <GradientButton onClick={loginWithG} text="Continue with Google">
             <GoogleLogo />
