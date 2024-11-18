@@ -27,10 +27,13 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useChatContext } from "@/hooks/useChatContext";
+import { useWallet } from "@solana/wallet-adapter-react";
+
 
 export default function Component({ children }) {
   const [isOpen, setIsOpen] = useState(true);
   const { activeUser } = useChatContext();
+  const { publicKey } = useWallet();
   return (
     <div className="h-[94vh] sm:h-screen  bg-orange-400 w-full  relative ">
       <div className="flex h-full relative overflow-hidden  bg-gray-950 text-gray-300">
@@ -56,7 +59,7 @@ export default function Component({ children }) {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <div className="sm:text-sm text-xs flex cursor-pointer text-gray-500">
-                          0x1234...5678
+                          {publicKey?.toBase58().slice(0, 10)}
                           <ChevronDown className="inline ml-1" size={16} />
                         </div>
                       </TooltipTrigger>
@@ -66,7 +69,7 @@ export default function Component({ children }) {
                           <div className="bg-purle-700 border-purple-400 border text-white text-sm rounded-lg shadow-lg  max-w-xs">
                             <div className="flex items-center ">
                               <span className="font-mono p-2 pr-0 text-xs">
-                                0x12340x123456780x123456785678
+                                {publicKey?.toBase58().slice(0,20)}
                               </span>
                               <div className=" group cursor-pointer p-3">
                                 <Copy
