@@ -21,7 +21,6 @@ const Testimonials = (props) => {
   const updateCurrSlide = useCallback((emblaApi) => {
     if (!emblaApi) return;
     setCurrSlide(emblaApi.selectedScrollSnap());
-    console.log(emblaApi.selectedScrollSnap(), "d");
   }, []);
   useEffect(() => {
     const autoplay = emblaApi?.plugins()?.autoplay;
