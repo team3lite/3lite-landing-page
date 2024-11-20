@@ -1,10 +1,9 @@
 "use client";
 import { PersonIcon } from "@/(auth)/_components/MobileAuth";
-import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import GrainyBackground from "@/components/GrainyBackground";
-import SendSui from "@/components/SendSui";
-import ChatList from "@/components/ChatList";
+import SendSol from "@/components/SendSol";
+
 import {
   Tooltip,
   TooltipContent,
@@ -12,9 +11,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import {
+  Settings,
+  User,
+  ChevronDown,
+  LogOut,
   Search,
   MoreVertical,
-  ChevronDown,
   Home,
   Copy,
   Workflow,
@@ -22,11 +24,16 @@ import {
   ListMinusIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
+import { useChatContext } from "@/hooks/useChatContext";
+import { useWallet } from "@solana/wallet-adapter-react";
+
 
 export default function Component({ children }) {
   const [isOpen, setIsOpen] = useState(true);
+  const { activeUser } = useChatContext();
+  const { publicKey } = useWallet();
   return (
     <div className="h-[94vh] sm:h-screen  bg-orange-400 w-full  relative ">
       <div className="flex h-full relative overflow-hidden  bg-gray-950 text-gray-300">
@@ -46,13 +53,13 @@ export default function Component({ children }) {
                 </div>
                 <div className=" relative">
                   <h2 className="sm:text-xl text-sm font-bold text-slate-300">
-                    Suift Admin
+                    {activeUser}
                   </h2>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <div className="sm:text-sm text-xs flex cursor-pointer text-gray-500">
-                          0x1234...5678
+                          {publicKey?.toBase58().slice(0, 10)}
                           <ChevronDown className="inline ml-1" size={16} />
                         </div>
                       </TooltipTrigger>
@@ -62,7 +69,7 @@ export default function Component({ children }) {
                           <div className="bg-purle-700 border-purple-400 border text-white text-sm rounded-lg shadow-lg  max-w-xs">
                             <div className="flex items-center ">
                               <span className="font-mono p-2 pr-0 text-xs">
-                                0x12340x123456780x123456785678
+                                {publicKey?.toBase58().slice(0,20)}
                               </span>
                               <div className=" group cursor-pointer p-3">
                                 <Copy
@@ -86,7 +93,7 @@ export default function Component({ children }) {
                   <span className="inline sm:hidden">Dev</span>
                   <Workflow size={16} className="ml-1" />
                 </span>
-                <SendSui />
+                <SendSol />
                 <button className="p-2 rounded-full hover:bg-gray-800">
                   <MoreVertical size={24} className="text-purple-600" />
                 </button>
@@ -103,15 +110,11 @@ export default function Component({ children }) {
 }
 
 const SideBar = ({ isOpen, setIsOpen }) => {
-  const dummyUsers = [
-    "Chidi",
-    "Josh",
-    "Divine",
-    "Wisdom",
-    "Charles",
-    "Henditz",
-    "Timothy",
-  ];
+  const { activeUser, setActiveUser } = useChatContext();
+  const dummyUsers = ["3Lite Admin", "Chidi"];
+  useEffect(() => {
+    setActiveUser(dummyUsers[0]);
+  }, []);
 
   return (
     <div
@@ -127,11 +130,13 @@ const SideBar = ({ isOpen, setIsOpen }) => {
           <Link href="/" className="">
             <Home className=" " />
           </Link>
-          <h1 className="text-xl font-bold text-slate-300">Suift Chat</h1>
+          <h1 className="text-xl font-bold text-slate-300">3Lite Chat</h1>
         </div>
         <div className="">
-          <button className="p-2 rounded-full hover:bg-gray-800">
-            <MoreVertical size={24} className="text-slate-300" />
+          <button className="flex place-content-center">
+            <Web3MessengerDropdown>
+              <MoreVertical size={24} className="text-slate-300" />
+            </Web3MessengerDropdown>
           </button>
           <Button
             onClick={() => {
@@ -153,11 +158,20 @@ const SideBar = ({ isOpen, setIsOpen }) => {
           <Search className="absolute left-3 top-2.5 text-gray-500" size={20} />
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto h-full mb-3 hide-scrollbar ">
         {dummyUsers.map((user, i) => (
           <div
             key={i}
-            className="flex items-center p-4 gap-3 hover:bg-gray-800 cursor-pointer"
+            onClick={() => {
+              setActiveUser(user);
+            }}
+            className={clsx(
+              "flex items-center p-4 gap-3 hover:bg-opacity-80 cursor-pointer",
+              {
+                "bg-gray-800": activeUser === user,
+                "hover:bg-gray-800 hover:bg-opacity-30": activeUser !== user,
+              }
+            )}
           >
             <div className="bg-orange-400 backdrop-blur-sm bg-opacity-70 size-10 rounded-full p-2">
               <PersonIcon className="size-full fill-orange-700 rounded-full text-white stroke-white" />
@@ -179,6 +193,87 @@ const SideBar = ({ isOpen, setIsOpen }) => {
           </div>
         ))}
       </div>
+    </div>
+  );
+};
+
+const Web3MessengerDropdown = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const handleOptionClick = (option) => {
+    console.log(`Navigating to ${option}`);
+    setIsOpen(false);
+    // Add your navigation logic here
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div
+      onClick={toggleDropdown}
+      className="relative  rounded-full hover:bg-gray-800 p-2 inline-block text-left"
+      ref={dropdownRef}
+    >
+      <div className="size-fit">{children}</div>
+
+      {isOpen && (
+        <div className="absolute overflow-hidden right-0 mt-2 p-0 w-[180px] shrink-0 rounded-[20px] shadow-lg bg-gray-800 ring-1  ring-opacity-5 divide-y divide-gray-100 z-10">
+          <div
+            className=" "
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="options-menu"
+          >
+            <Link
+              href={"/profile"}
+              onClick={() => handleOptionClick("profile")}
+              className="flex shrink-0 items-center px-4 py-3 text-sm text-slate-200 hover:bg-gray-700 hover:text-purple-100 w-full text-left transition-colors duration-200"
+              role="menuitem"
+            >
+              <User className="mr-3 h-5 w-5 text-white" aria-hidden="true" />
+              View Profile
+            </Link>
+            <button
+              onClick={() => handleOptionClick("settings")}
+              className="flex items-center px-4 py-3 pb-4 text-sm text-slate-200 hover:bg-gray-700 hover:text-purple-100 w-full text-left transition-colors duration-200"
+              role="menuitem"
+            >
+              <Settings
+                className="mr-3 h-5 w-5 text-white"
+                aria-hidden="true"
+              />
+              Settings
+            </button>
+          </div>
+          <div className="">
+            <button
+              onClick={() => handleOptionClick("logout")}
+              className="flex items-center px-4 py-3 text-sm text-red-500 hover:bg-gray-700  w-full text-left transition-colors duration-200"
+              role="menuitem"
+            >
+              <LogOut
+                className="mr-3 h-5 w-5 text-red-500"
+                aria-hidden="true"
+              />
+              Log out
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

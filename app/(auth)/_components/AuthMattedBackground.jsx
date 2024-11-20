@@ -112,7 +112,7 @@ const AuthMattedBackground = () => {
         </g>
         <path
           stroke="#fff"
-          stroke-miterlimit="10"
+          strokeMiterlimit="10"
           d="M-267 422.015h1443"
           className="mix-blend-mode:overlay "
         />
