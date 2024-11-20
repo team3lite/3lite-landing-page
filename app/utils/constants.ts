@@ -5,7 +5,6 @@ import {
   Layers,
   LockOpen,
   MessageCircle,
-  Users,
 } from "lucide-react";
 import cardFastIcon from "../assets/images/perks/card-fast-icon.png";
 import cardPrivacyIcon from "../assets/images/perks/card-privacy-icon.png";
@@ -27,10 +26,21 @@ export const navLinks = [
     link: "#features",
     icon: Layers,
   },
+
+  {
+    name: "Chat",
+    link: "/chat",
+    icon: Binoculars,
+  },
   {
     name: "Join Community",
-    link: "/",
-    icon: Users,
+    link: "#joincommunity",
+    icon: MessageCircle,
+  },
+  {
+    name: "Login",
+    link: "/login",
+    icon: LockOpen,
   },
 ];
 
@@ -56,25 +66,28 @@ export const perks = [
 ];
 
 export const displayCoreFeatures = [
-  "Welcome to 3lite",
-  "Secure Messaging for the Decentralized Future",
-  "Start your Project’s journey with us",
+  "Welcome to Suift",
+  "Privacy is a right, not a luxury",
+  "Blazing Fast Messaging",
 ];
 
 export const testimonials = [
   {
-    title: "Blazing Fast Messaging",
+    name: "Josh Sparks",
+    title: "Seamless Transactions!",
     description:
-      "Powered by the Sui Blockchain Experience lightning-fast messaging with Suift, where conversations flow as quickly and seamlessly as in real life. With the scalability and speed of the Sui Blockchain, your chats are instant and fluid, keeping communication smooth and uninterrupted",
+      "The wallet feature is a life-saver! I can send payments just as easily as sending a message—no complicated wallet addresses needed. 3lite has made transactions simple and secure.",
   },
   {
-    title: "Ultimate Privacy and Control",
+    name: "Big Cee",
+    title: "Totally Amazing!",
     description:
-      "Your Data, Your RulesSuift guarantees that your messages and data remain private and secure. Built on a decentralized platform, no third parties have access to monitor or sell your information. You have full control over your communications, ensuring complete privacy every time you connect.",
+      "I’ve never felt more in control of my privacy. 3lite user-friendly design and blockchain-based security make it my go-to messaging app for all my personal and professional communications.",
   },
   {
-    title: "Transparent Polling & Secure Wallet",
+    name: "Ugwu Chidi",
+    title: "Unmatched Privacy and Speed",
     description:
-      "Seamless Voting and Easy Transactions; Suift makes voting and fund transfers effortless. Organize polls and track votes on the blockchain with absolute transparency, ensuring that results can be revisited at any time. With our integrated wallet, sending and receiving funds is as easy as sending a message—simply use a username to make secure transactions swiftly and safely.",
+      "3lite has completely changed how our team communicates. With top-notch privacy features and lightning-fast messaging, we can stay connected securely without any worries about data leaks!",
   },
 ];

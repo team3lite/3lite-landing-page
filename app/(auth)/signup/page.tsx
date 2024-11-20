@@ -1,46 +1,149 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import PasswordInput from "../_components/CustomPasswordField";
 import GradientButton from "../_components/GradientButtons";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { AppleLogo, GoogleLogo } from "../login/page";
 import { CircleCheck, Lock } from "lucide-react";
 import { PasswordIcon, PersonIcon } from "../_components/MobileAuth";
 import { Switch } from "@/components/ui/switch";
+import { useGoogleLogin, useGoogleOAuth } from "@react-oauth/google";
+import axios from "axios";
+import {
+  createUserWithEmail,
+  createUserWithGoogle,
+} from "@/lib/db/authUtils/authFunctions";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { SolLogo } from "@/components/SolLogo";
 
-const page = () => {
+const Page = () => {
+  const router = useRouter();
+  const signupWithGoogle = useGoogleLogin({
+    onSuccess: (codeResponse) => {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${codeResponse.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${codeResponse.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then(async (res) => {
+          await createUserWithGoogle({
+            email: res.data.email,
+            name: res.data.name,
+            id: res.data.id,
+          });
+          console.log({ res: res.data });
+          toast.success("Account created successfully", {
+            description: "Welcome to the land of decentralized Messaging",
+            //success toast style
+            position: "top-right",
+            style: {
+              background: "#038654",
+              color: "#fff",
+            },
+          });
+          router.push("/chat");
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Account creation failed", {
+            description: err.message,
+            //success toast style
+            position: "top-right",
+            style: {
+              background: "#ff0000",
+              color: "#fff",
+            },
+          });
+        });
+    },
+    onError: (error) => console.log("Login Failed:", error),
+  });
+  const signupWithEmail = async (e) => {
+    e.preventDefault();
+    //const { email, username, password, authType } = data;
+    const email = e.target.email_signup.value;
+    const password = e.target.password_signup.value;
+    //username is email splited befor @ and limited to 20 characters
+    const username = email.split("@")[0].slice(0, 20);
+    try {
+      await createUserWithEmail({
+        email,
+        password,
+        username,
+      });
+      toast.success("Account created successfully", {
+        description: "Welcome to the land of decentralized Messaging",
+        //success toast style
+        position: "top-right",
+        style: {
+          background: "#038654",
+          color: "#fff",
+        },
+      });
+      router.push("/chat");
+    } catch (error) {
+      console.log(error);
+      toast.error("Account creation failed", {
+        description: error.message,
+        //success toast style
+        position: "top-right",
+        style: {
+          background: "#ff0000",
+          color: "#fff",
+        },
+      });
+    }
+  };
+
   return (
     <>
       <div className="sm:flex hidden w-96  font-Syne  px-12 py-6 rounded-2xl border border-neutral-600 flex-col justify-start items-center gap-3 ">
         <div className="Txt mb-3 flex-col justify-start items-center gap-2 flex">
           <div className="font-suse text-white text-3xl font-semibold ">
-            Start using Suift
+            Start using 3Lite
           </div>
         </div>
         <div className="EmailAndPssword bg-rd-100 w-full flex-col justify-start items-end gap-4 flex">
-          <div className="Fields text-white self-stretch  flex-col justify-start items-center gap-5 flex">
-            <div className="Txt self-stretch  flex-col justify-start items-start gap-2 flex">
-              <Label htmlFor="email_signin">E-mail</Label>
-              <Input
-                type="email"
-                id="email_signin"
-                placeholder="teamsuielite@gmail.com"
-                className="bg-transparent"
-              />
-            </div>
-            <div className="Txt self-stretch  flex-col justify-start items-start gap-3 flex">
-              <Label htmlFor="password_signin">Password</Label>
-              <PasswordInput
-                id="password_signin"
-                type="password"
-                className="bg-transparent"
-              />
-            </div>
+          <div className="Fields text-white self-stretch  ">
+            <form
+              className="w-full flex-col justify-start items-center gap-5 flex"
+              id="signup_form"
+              onSubmit={signupWithEmail}
+            >
+              <div className="Txt self-stretch  flex-col justify-start items-start gap-2 flex">
+                <Label htmlFor="email_signup">E-mail</Label>
+                <Input
+                  type="email"
+                  name="email_signup"
+                  id="email_signup"
+                  placeholder="team3Lite@gmail.com"
+                  className="bg-transparent"
+                />
+              </div>
+              <div className="Txt self-stretch  flex-col justify-start items-start gap-3 flex">
+                <Label htmlFor="password_signup">Password</Label>
+                <PasswordInput
+                  id="password_signup"
+                  name="password_signup"
+                  type="password"
+                  className="bg-transparent"
+                />
+              </div>
+            </form>
           </div>
 
           <div className="w-full mt-3">
             <Button
+              form="signup_form"
               size="lg"
               className="w-full relative font-suse text-base bg-white text-black hover:text-black hover:bg-slate-200"
             >
@@ -53,8 +156,17 @@ const page = () => {
           OR
         </div>
         <div className=" w-full  flex-col justify-center items-center gap-3 flex">
-          <GradientButton Icon={AppleLogo} text="Continue with Apple" />
-          <GradientButton Icon={GoogleLogo} text="Continue with Google" />
+          <GradientButton onClick={() => {}} text="Continue with Solana">
+            <div className="size-5">
+              <SolLogo />
+            </div>
+          </GradientButton>
+          <GradientButton
+            onClick={signupWithGoogle}
+            text="Continue with Google"
+          >
+            <GoogleLogo />
+          </GradientButton>
         </div>
         <div className="w-full flex justify-center">
           <div className="w-fit ">
@@ -85,8 +197,8 @@ const page = () => {
             <PersonIcon className="group-focus-within:stroke-white stroke-slate-400" />
             <input
               type="email"
-              id="email_signin"
-              placeholder="teamsuielite@gmail.com"
+              id="email_signup"
+              placeholder="team3Lite@gmail.com"
               className="bg-transparent text-white border-none  outline-none no-underline"
             />
             <CircleCheck size={24} className="text-white  fill-[#038654]" />
@@ -120,4 +232,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

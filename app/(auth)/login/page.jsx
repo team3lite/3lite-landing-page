@@ -1,3 +1,4 @@
+"use client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import PasswordInput from "../_components/CustomPasswordField";
@@ -5,37 +6,138 @@ import GradientButton from "../_components/GradientButtons";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PasswordIcon, PersonIcon } from "../_components/MobileAuth";
-import { CircleCheck } from "lucide-react";
+import { CircleCheck, Loader2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
+import { useGoogleLogin } from "@react-oauth/google";
+import { SolLogo } from "@/components/SolLogo";
+import axios from "axios";
+import {
+  loginWithEmail,
+  loginWithGoogle,
+} from "@/lib/db/authUtils/authFunctions";
+import { useState } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { WalletModalButton } from "@solana/wallet-adapter-react-ui";
 
-const page = () => {
+
+const Page = () => {
+  const [loggingIn, setLoggingIn] = useState(false);
+  const router = useRouter();
+  // log out function to log the user out of google and set the profile array to null
+  const loginWithG = useGoogleLogin({
+    onSuccess: (codeResponse) => {
+      axios
+        .get(
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${codeResponse.access_token}`,
+          {
+            headers: {
+              Authorization: `Bearer ${codeResponse.access_token}`,
+              Accept: "application/json",
+            },
+          }
+        )
+        .then(async (res) => {
+          setLoggingIn(true);
+          const resp = await loginWithGoogle({
+            email: res.data.email,
+            name: res.data.name,
+            id: res.data.id,
+          });
+
+          setLoggingIn(false);
+          toast.success("Logged in successfully", {
+            //success toast style
+            position: "top-right",
+            style: {
+              background: "#038654",
+              color: "#fff",
+            },
+          });
+          router.push("/chat");
+          console.log({ resp });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(err.message, {
+            //error toast style
+            position: "top-right",
+            style: {
+              background: "#C8497F",
+              color: "#fff",
+            },
+          });
+        });
+    },
+    onError: (error) => console.log("Login Failed:", error),
+  });
+  // log in function to log the user in with email and password
+  const loginWithE = async (e) => {
+    e.preventDefault();
+    setLoggingIn(true);
+    const email = e.target.email_signin.value;
+    const password = e.target.password_signin.value;
+    console.log({ email, password });
+    try {
+      const resp = await loginWithEmail({ email, password });
+      console.log({ resp });
+      toast.success("Logged in successfully", {
+        //success toast style
+        position: "top-right",
+        style: {
+          background: "#038654",
+          color: "#fff",
+        },
+      });
+      router.push("/chat");
+    } catch (err) {
+      toast.error(err.message, {
+        //error toast style
+        position: "top-right",
+        style: {
+          background: "#C8497F",
+          color: "#fff",
+        },
+      });
+    } finally {
+      setLoggingIn(false);
+    }
+  };
   return (
     <>
       <div className="sm:flex w-96  font-Syne  px-12 py-6 rounded-2xl border border-neutral-600 flex-col justify-start items-center gap-3 hidden">
         <div className="Txt mb-3 flex-col justify-start items-center gap-2 flex">
           <div className="font-suse text-white text-3xl font-semibold ">
-            Sign in to Suift
+            Login to 3Lite
           </div>
         </div>
         <div className="EmailAndPssword bg-rd-100 w-full flex-col justify-start items-end gap-4 flex">
-          <div className="Fields text-white self-stretch  flex-col justify-start items-center gap-5 flex">
-            <div className="Txt self-stretch  flex-col justify-start items-start gap-2 flex">
-              <Label htmlFor="email_signin">E-mail</Label>
-              <Input
-                type="email"
-                id="email_signin"
-                placeholder="teamsuielite@gmail.com"
-                className="bg-transparent"
-              />
-            </div>
-            <div className="Txt self-stretch  flex-col justify-start items-start gap-3 flex">
-              <Label htmlFor="password_signin">Password</Label>
-              <PasswordInput
-                id="password_signin"
-                type="password"
-                className="bg-transparent"
-              />
-            </div>
+          <div className="Fields text-white  self-stretch ">
+            <form
+              className="w-full flex-col justify-start items-center gap-5 flex"
+              id="signup_form"
+              onSubmit={loginWithE}
+            >
+              <div className="Txt self-stretch  flex-col justify-start items-start gap-2 flex">
+                <Label htmlFor="email_signin">E-mail</Label>
+                <Input
+                  type="email"
+                  id="email_signin"
+                  name="email_signin"
+                  placeholder="team3Lite@gmail.com"
+                  className="bg-transparent"
+                />
+              </div>
+              <div className="Txt self-stretch  flex-col justify-start items-start gap-3 flex">
+                <Label htmlFor="password_signin">Password</Label>
+                <PasswordInput
+                  id="password_signin"
+                  name="password_signin"
+                  type="password"
+                  className="bg-transparent"
+                />
+              </div>
+            </form>
           </div>
           <div className="ForgotMyPassword text-neutral-400 text-sm font-normal font-['Montserrat']">
             Forgot my password?
@@ -43,11 +145,20 @@ const page = () => {
           <div className="w-full">
             <Button
               size="lg"
-              className="w-full font-suse text-base bg-white text-black hover:text-black hover:bg-slate-200"
+              form="signup_form"
+              className="w-full font-suse flex items-center gap-1  text-base bg-white active:bg-slate-300 text-black hover:text-black hover:bg-slate-200"
             >
-              <Link href="/chat" className="w-full">
-                Sign in
-              </Link>
+              {loggingIn ? (
+                <>
+                  <Loader2
+                    size={16}
+                    className="animate-spin stroke-orange-300"
+                  />{" "}
+                  signing in..{" "}
+                </>
+              ) : (
+                <span> Sign in</span>
+              )}
             </Button>
           </div>
         </div>
@@ -55,8 +166,25 @@ const page = () => {
           OR
         </div>
         <div className=" w-full  flex-col justify-center items-center gap-3 flex">
-          <GradientButton Icon={AppleLogo} text="Continue with Apple" />
-          <GradientButton Icon={GoogleLogo} text="Continue with Google" />
+          <GradientButton>
+              {/* <SolLogo />  */}
+              <WalletModalButton style={
+            {
+              "backgroundColor":"transparent",
+              "width":"100%",
+              "position":"relative",
+              "right":"0",
+              "fontWeight":"400",
+              "font-size":"14px"
+
+            }
+          } startIcon={<SolLogo/>} children={"Continue with Solana"}/>
+               
+          
+          </GradientButton>
+          <GradientButton onClick={loginWithG} text="Continue with Google">
+            <GoogleLogo />
+          </GradientButton>
         </div>
         <div className="w-full flex justify-center">
           <div className="w-fit ">
@@ -87,8 +215,8 @@ const page = () => {
             <PersonIcon className="group-focus-within:stroke-white stroke-slate-400" />
             <input
               type="email"
-              id="email_signin"
-              placeholder="teamsuielite@gmail.com"
+              id="email_signin_mob"
+              placeholder="team3Lite@gmail.com"
               className="bg-transparent text-white border-none  outline-none no-underline"
             />
             <CircleCheck size={24} className="text-white  fill-[#038654]" />
@@ -96,7 +224,7 @@ const page = () => {
           <div className="group self-stretch ring-0 focus-within:ring-[2px] focus-within:ring-[#5739f2]  pl-4 py-[10px] bg-[#3a3f52] rounded-xl justify-start items-center gap-2 inline-flex">
             <PasswordIcon className="group-focus-within:stroke-white stroke-slate-400" />
             <PasswordInput
-              id="password_signin"
+              id="password_signin_mob"
               type="password"
               className="bg-transparent py-1 focus-visible:outline-none  focus-visible:ring-0  text-white border-none  outline-none no-underline"
             />
@@ -113,7 +241,10 @@ const page = () => {
           </div>
         </div>
         <div className="self-stretch px-20 py-4 bg-[#c8497f] rounded-xl justify-center items-center gap-2 inline-flex">
-          <Link href="/chat" className="w-full text-center text-white text-sm font-medium font-['Inter'] leading-tight">
+          <Link
+            href="/chat"
+            className="w-full text-center text-white text-sm font-medium font-['Inter'] leading-tight"
+          >
             Sign in
           </Link>
         </div>
@@ -122,7 +253,7 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
 
 export const AppleLogo = () => {
   return (

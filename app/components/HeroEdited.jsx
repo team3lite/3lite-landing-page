@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import bgImage from "../assets/images/hero-bg.png";
 import Image from "next/image";
@@ -5,8 +6,17 @@ import Navbar from "./Navbar";
 import HorizontalInfoScroll from "./HorizontalInfoScroll";
 import blockImage from "../assets/images/block.png";
 import HeroOverlay from "./HeroOverlay";
+import { useWalletModal, WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useWallet } from "@solana/wallet-adapter-react";
+
+
+
 
 const HeroEdited = () => {
+  const walletinfo = useWallet();
+
+  
+
   return (
     <section className="lg:h-[150dvh] bg-brand">
       <div className="w-full h-full">
@@ -35,7 +45,8 @@ const HeroEdited = () => {
               </p>
 
               <div className="flex flex-col md:flex-row gap-3">
-                <button className="bg-brand-light px-4 py-2 rounded-lg">Launch Bot</button>
+                <WalletMultiButton style={{}} />
+                <button  className="bg-brand-light px-4 py-2 rounded-lg">Launch Bot</button>
                 <button className="bg-[#C2C0F3] px-4 py-2 rounded-lg text-brand">Join community</button>
               </div>
             </div>
