@@ -1,0 +1,1000 @@
+  317  npm uninstall @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util --force
+  318  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  319  npm uninstall "@radix-ui/react-checkbox": "^1.1.1",
+  320  npm uninstall @radix-ui/react-checkbox  @radix-ui/react-collapsible @radix-ui/react-dialog @radix-ui/react-icons @radix-ui/react-label @radix-ui/react-navigation-menu @radix-ui/react-popover @radix-ui/react-progress @radix-ui/react-select @radix-ui/react-separator @radix-ui/react-slider @radix-ui/react-slot @radix-ui/react-tooltip --force
+  321  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  322  npm uninstall  @tanstack/react-query @radix-ui/react-dropdown-menu @trpc/client @trpc/next @trpc/react-query @trpc/server --force
+  323  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  324  npm uninstall embla-carousel-autoplay embla-carousel-react --force
+  325  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  326  npm unistall  lucide-react
+  327  npm uninstall  lucide-react
+  328  npm uninstall  lucide-react -force
+  329  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  330  npm uninstall react-hook-form --force
+  331  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  332  npm uninstall @hookform/resolvers --force
+  333  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  334  npm uninstall react-image-crop --force
+  335  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  336  npm uninstall react-sortablejs --force
+  337  npm uninstall react-image-crop --force
+  338  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  339  npm uninstall react-image-crop --force
+  340  npm i @ffmpeg/ffmpeg @ffmpeg/core @ffmpeg/util 
+  341  npm i sonner
+  342  npm i sortablejs tailwind-merge validator youtube-srzod
+  343  npm i sortablejs tailwind-merge validator youtube-sr zod
+  344  npm i react-sortablejs lucide-react
+  345  npm i lucid-react
+  346  npm i lucide-react
+  347  npm i react-sortablejs
+  348  npm i react-sortablejs  --legacy-peer-deps
+  349  npm i @radix-ui/react-icons
+  350  npm i embla-carousel-react
+  351  nnpm run dev
+  352  npm run dev
+  353  npm i tailwindcss-animate
+  354  npm uninstall react-sortablejs --force
+  355  npm i tailwindcss-animate
+  356  npm i embla-carousel-react
+  357  npx shadcn@latest add badge
+  358  npx shadcn@latest add button card carousel checkbox collapsible dialog dropdown-menu input navigation-menu badge label popover progress select separator sheet skeleton sheet skeleton slider tooltip
+  359  npm i react-sortablejs
+  360  npm i react-sortablejs --force
+  361  npm run dev
+  362  clear
+  363  npm run dev
+  364  cd programming/
+  365  cd vid_repo/
+  366  code .
+  367  npm run dev
+  368  npm run build
+  369  npm start
+  370  git add .
+  371  git commit -m "fixed search"
+  372  npm install @distube/ytdl-core@latest
+  373  npm run dev
+  374  npm run build
+  375  npm install @distube/ytdl-core@latest
+  376  npm install @distube/ytdl-core@latest --force
+  377  npm un build
+  378  npm run build
+  379  npm start
+  380  clear
+  381  git log -1 --pretty=format:'%ae'
+  382  git commit --amend --author="Ifiora Timothy <ifioratimothy2001@gmail.com>"
+  383  git log -1 --pretty=format:'%ae'
+  384  git add .
+  385  git commit -m "minor changes"
+  386  git add .
+  387  git commit -m "minor changes"
+  388  git push -u origin dev
+  389  git pull
+  390  git pull dev
+  391  npm uninstall socket.io socket.io-client
+  392  npm uninstall socket.io socket.io-client --force
+  393  npm run lint
+  394  git add .
+  395  git commit -m "removed socketio"
+  396  git push -u origin dev
+  397  npm run dev
+  398  git add .
+  399  git commit -m "removed socketio"
+  400  git push -u origin dev
+  401  git add .
+  402  git commit -m "removed socketio"
+  403  git push -u origin dev
+  404  git add .
+  405  git commit -m "removed socketio"
+  406  git push -u origin dev
+  407  git add .
+  408  git commit -m "removed socketio"
+  409  git push -u origin dev
+  410  git add .
+  411  git commit -m "removed socketio"
+  412  git push -u origin dev
+  413  git add .
+  414  git commit -m "removed socketio"
+  415  git push -u origin dev
+  416  git add .
+  417  git push -u origin dev
+  418  git commit -m "removed socketio"
+  419  git push -u origin dev
+  420  git add .
+  421  git commit -m "removed socketio"
+  422  git push -u origin dev
+  423  npm start
+  424  git add .
+  425  git commit -m "updated the search functionlity"
+  426  git push -u origin dev
+  427  git log -1 --pretty=format:'%ae'
+  428  git config user.email "ifioratimothy2001@gmail.com"
+  429  git log -1 --pretty=format:'%ae'
+  430  git config user.email "ifioratimothy2001@gmail.com"
+  431  git config user.email "ifioratimothy2001@gmail.com"git config --global user.email "ifioratimothy2001@gmail.com"
+  432  git config --global user.email "ifioratimothy2001@gmail.com"
+  433  git log -1 --pretty=format:'%ae'
+  434  npm run dev
+  435  npm rurn dev
+  436  npm run dev
+  437  next dev -H 0.0.0.0
+  438  npm run dev
+  439  npm i next@latest
+  440  npm i next@latest --force
+  441  npm run dev
+  442  git add .
+  443  git commit -m "extra tools up and working "
+  444  git add .
+  445  git commit -m "minor updates"
+  446  git add .
+  447  git commit -m "dd"
+  448  sudo service mongodb start
+  449  mong
+  450  mongo
+  451  mongod
+  452  sudo mongod --bind_ip 0.0.0.0 --dbpath /data/db
+  453  npm run dev
+  454  clear
+  455  cls
+  456  cler
+  457  clear
+  458  npm run dev
+  459  git add .
+  460  git commit -m "set up the signup using transactions"
+  461  git add .
+  462  git commit -m "checking"
+  463  git add .
+  464  git commit -m "minor update to JWT"
+  465  mongosh
+  466  ps aux | grep mongod
+  467  sudo mongod --bind_ip 0.0.0.0 --dbpath /data/db --replSet rs0
+  468  ifconfig
+  469  hostname -i
+  470  hostname -I
+  471  hostname -i
+  472  hostname -I
+  473  npm run dev
+  474  ps aux | grep mongod
+  475  rs.initiate({_id:"rs0",members:[{_id:0,host:"localhost:27017"}]})
+  476  mongosh
+  477  ip addr show eth0
+  478  python3 -c "from http.server import BaseHTTPRequestHandler, HTTPServer; HTTPServer(('0.0.0.0', 8080), type('Handler', (BaseHTTPRequestHandler,), {'do_GET': lambda self: (self.send_response(200), self.end_headers(), self.wfile.write(b'Hello, World\!'))})).serve_forever()"
+  479  set +H
+  480  python3 -c "from http.server import BaseHTTPRequestHandler, HTTPServer; HTTPServer(('0.0.0.0', 8080), type('Handler', (BaseHTTPRequestHandler,), {'do_GET': lambda self: (self.send_response(200), self.end_headers(), self.wfile.write(b'Hello, World!'))})).serve_forever()"
+  481  cd images/
+  482  ffmpeg -i "jpgi.jpg" -q:v 15 -frames:v 1 output.jpg
+  483  sudo apt  install ffmpeg
+  484  ffmpeg -i "jpgi.jpg" -q:v 15 -frames:v 1 output.jpg
+  485  ffmpeg -i "jpgi.jpg" -q:v 15 -frames:v 1 -update 1 output.jpg
+  486  ffmpeg -i "pngi.png" -q:v 15 -frames:v 1 -update 1 output.jpg
+  487  ffmpeg -formats
+  488  ip config
+  489  ipconfig
+  490  ifconfig
+  491  sudo apt install net-tools
+  492  ifconfig
+  493  ip addr show
+  494  ping 192.168.72.198
+  495  python -m http.server 8080
+  496  cd ..
+  497  python -m http.server 8080
+  498  python3 -m http.server 8080
+  499  ip addr show
+  500  python3 -m http.server 8080
+  501  cd ..
+  502  npx create-next-app@latest dexMedia
+  503  npx create-next-app@latest dexmedia
+  504  npm run dev
+  505  cd dexmedia/
+  506  npm run dev
+  507  npx shadcn@latest init -d
+  508  git init
+  509  git checkout timdev
+  510  clear
+  511  git commit -m "initial commit"
+  512  git add next.config.ts
+  513  git commit -m "initial commit"
+  514  git checkout timdev
+  515  git branch timdev
+  516  git add .
+  517  git checkout timdev
+  518  git add .
+  519  git commit -m "setup"
+  520  git branch dev
+  521  git checkout dev
+  522  git push -u origin dev
+  523  git checkout timdev
+  524  git push -u origin timdev
+  525  git checkout master
+  526  git push -u origin master
+  527  git checkout timdev
+  528  git add .
+  529  git checkout timdev
+  530  git add .
+  531  git commit -m "done with the sidebars ui"
+  532  git push -u origin timdev
+  533  git add .
+  534  git commit -m "minor update"
+  535  git push -u origin timdev
+  536  git add .
+  537  git commit -m "done with the dashboard ui"
+  538  git push -u origin timdev
+  539  git add .
+  540  git commit -m "finished individual "
+  541  git add .
+  542  git commit -m "finished individual "
+  543  git push -u origin timdev
+  544  git add ,
+  545  gt add .
+  546  git add .
+  547  git commit -m "added the create news modal"
+  548  git push -u origin timdev
+  549  git add ,
+  550  git add .
+  551  git commit -m "minor updates"
+  552  git push -u origin timdev
+  553  npm run lint
+  554  clear
+  555  npm run lint
+  556  clear
+  557  npm run lint
+  558  git add .
+  559  git commit -m "minor fixes"
+  560  git push -u origin timdev
+  561  npm checkout dev
+  562  git checkout dev
+  563  git reset --hard timdev
+  564  npm run dev
+  565  mongosh
+  566  git add .
+  567  git commit -m "setup dev"
+  568  git push -u origin timdev
+  569  git push -u origin dev
+  570  sudo mongod --bind_ip 0.0.0.0 --dbpath /data/db --replSet rs0
+  571  npm run dev
+  572  git add .
+  573  git commit -m "setup dev"
+  574  git push -u origin dev
+  575  npm run dev
+  576  git add .
+  577  git commit -m "done with connect component"
+  578  git checkout timdev
+  579  git reset --hard dev
+  580  git push -u origin timdev
+  581  git checkout dev
+  582  cd programming/ffmpeg/
+  583  clear
+  584  python compress.py
+  585  python3 compress.py
+  586  npm i sonner
+  587  npm i --save-dev @vercel/style-guide
+  588  npm run lint
+  589  claer
+  590  clear
+  591  npm run lint
+  592  git add .
+  593  git commit -m "setup canister"
+  594  git push -u origin dev
+  595  git add .
+  596  git commit -m "minor update"
+  597  git push -u origin dev
+  598  git add .
+  599  git commit -m "minor update"
+  600  git push -u origin dev
+  601  git add .
+  602  git commit -m "minor update"
+  603  git push -u origin dev
+  604  git add .
+  605  git commit -m "minor update"
+  606  git push -u origin dev
+  607  npm run lint
+  608  git add .
+  609  git commit -m "minor update"
+  610  git push -u origin dev
+  611  npm install @dfinity/use-auth-client
+  612  git add .
+  613  git commit -m "fsd"
+  614  git add .
+  615  git commit -m "added"
+  616  git push -u origin dev
+  617  git add .
+  618  git commit -m "added link"
+  619  git push -u origin dev
+  620  npm run dev
+  621  cd /mnt/c/Users/
+  622  cd Videos
+  623  cd ifior/
+  624  cd Videos/
+  625  cd ..
+  626  cd programming
+  627  cd ~
+  628  cd programming/
+  629  cd ffmpeg/
+  630  clear
+  631  python3 compress
+  632  python3 compress.py
+  633  clear
+  634  python3 compress.py
+  635  scarb fmt
+  636  scarb build
+  637  scarb --version
+  638  snforge --version
+  639  curl -L https://raw.githubusercontent.com/foundry-rs/starknet-foundry/master/scripts/install.sh | sh
+  640  snfoundryup
+  641  snforge --version
+  642  sncast --version
+  643  cd ~
+  644  cd programming/
+  645  mkdir rust > cd rust
+  646  mkdir rust; cd rust
+  647  snforge init countes
+  648  snforge init counters
+  649  snforge init classroom
+  650  snforge init crosscontract
+  651  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  652  rustc --version
+  653  rustup update
+  654  curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+  655  scarb --version'
+  656  scarb --version
+  657  scarb cairo run
+  658  scarb cairo-run
+  659  cairo --version
+  660  scarb --version
+  661  scarb cairo-run
+  662  scarb build
+  663  scarb cairo-run
+  664  scarb build
+  665  scarb cairo-run
+  666  scarb fmt
+  667  scarb cairo-run
+  668  cd programming/rust/
+  669  snforge init cairo
+  670  scarb new hello_world
+  671  curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh
+  672  scarb --version
+  673  scarb new hello_world2
+  674  starkli help
+  675  curl https://get.starkli.sh | sh
+  676  starkliup
+  677  starkli --help
+  678  starkliup
+  679  pip install starknet-devnet
+  680  pip3 install starknet-devnet
+  681  cd programming/
+  682  python3 -m venv rust
+  683  source rust/bin/activate
+  684  pip install starknet-devnet
+  685  Building wheels for collected packages: greenlet
+  686    Building wheel for greenlet (pyproject.toml) ... error
+  687    error: subprocess-exited-with-error
+  688    × Building wheel for greenlet (pyproject.toml) did not run successfully.
+  689    │ exit code: 1
+  690    ╰─> [292 lines of output]
+  691        /tmp/pip-build-env-ju0sqsvn/overlay/lib/python3.12/site-packages/setuptools/_distutils/dist.py:261: UserWarning: Unknown distribution option: 'test_suite'
+  692          warnings.warn(msg)
+  693        running bdist_wheel
+  694        running build
+  695        running build_ext
+  696        building 'greenlet' extension
+  697        creating build/temp.linux-x86_64-cpython-312
+  698        x86_64-linux-gnu-gcc -fno-strict-overflow -Wsign-compare -DNDEBUG -g -O2 -Wall -fPIC -I/home/techdoc/programming/rust/include -I/usr/include/python3.12 -c greenlet.c -o build/temp.linux-x86_64-cpython-312/greenlet.o
+  699        greenlet.c: In function ‘green_clear_exc’:
+  700        greenlet.c:176:21: error: ‘_PyErr_StackItem’ {aka ‘struct _err_stackitem’} has no member named ‘exc_type’
+  701          176 |         g->exc_state.exc_type = NULL;
+  702              |                     ^
+  703        greenlet.c:178:21: error: ‘_PyErr_StackItem’ {aka ‘struct _err_stackitem’} has no member named ‘exc_traceback’
+  704  pip install --upgrade pip setuptools
+  705  pip install starknet-devnet
+  706  pip install greenlet==1.1.3  # or try any stable version prior to 3.12
+  707  pip install greenlet==1.1.3 
+  708  python3.10 -m venv rustclaer
+  709  clear
+  710  cd programming/rust/
+  711  starkli block-number
+  712  starkli block-number --rpc https://starknet-mainnet.g.alchemy.com/version/rpc/v0_7/CRr  --network  mainnet
+  713  clear
+  714  starknet transaction 0x394
+  715  starkli transaction 0x394
+  716  starkli transaction 0x3494
+  717  curl https://weekly-issue3-neobrutalism.vercel.app/
+  718  cls
+  719  clea
+  720  clear
+  721  starkli signer gen-keypair 
+  722  starkli signer keystore 
+  723  starkli signer keystore new
+  724  starkli signer keystore new secret-key
+  725  code .
+  726  starkli signer keystore from key 0x048ff60686515a5c62ea37379f611163ad5d99fcc25da782442ca78e9dda5f43 secret2
+  727  starkli signer keystore from-key 0x048ff60686515a5c62ea37379f611163ad5d99fcc25da782442ca78e9dda5f43 secret2
+  728  starkli signer keystore from-key 0x048ff60686515a5c62ea37379f611163ad5d99fcc25da782442ca78e9dda5f43 
+  729  starkli signer keystore from-key secret3
+  730  clear
+  731  starkli account
+  732  starkli account oz
+  733  starkli account oz init oz-account
+  734  starkli account oz init oz-account.json --keystore secret3
+  735  starkli account deploy oz-account.json
+  736  starkli account deploy oz-account.json --keystore secret3
+  737  clear
+  738  $ pip install starknet-devnet
+  739  pip install starknet-devnet
+  740  pip2 install starknet-devnet
+  741  pip3 install starknet-devnet
+  742  pip install starknet-devnet
+  743  cd programming/
+  744  python3.10 -m venv rust
+  745  python3.12 -m venv rust
+  746  source rust/bin/activate
+  747  pip install greenlet==1.1.3  # or the last compatible version before 3.12
+  748  pip install greenlet==1.1.3  # or the last compatible version before 3.12sudo apt update
+  749  sudo apt install python3.8 python3.8-venv
+  750  sudo apt update
+  751  sudo apt install python3.8 python3.8-venv
+  752  sudo apt install python3.8 
+  753  python3.8 -m venv rust
+  754  python --version
+  755  exit
+  756  sudo apt install python3.8 python3.8-venv
+  757  sudo apt update
+  758  sudo apt install python3.9 python3.9-venv
+  759  sudo apt update
+  760  sudo apt install software-properties-common
+  761  sudo add-apt-repository ppa:deadsnakes/ppa
+  762  sudo apt install python3.8 python3.8-venv
+  763  cd programming/
+  764  python --version
+  765  python3 --version
+  766  python3.8 -m venv rust
+  767  source rust/bin/activate
+  768  python --verion
+  769  python --version
+  770  python3 --version
+  771  cd programming/
+  772  cd rust
+  773  delete bin
+  774  cd ..
+  775  source rust/bin/activate
+  776  deactivate
+  777  cd bin
+  778  cd rust
+  779  rm -rf bin
+  780  rm -rf lib64
+  781  python3.8 -m venv rust
+  782  rm -rf rust
+  783  cd ..
+  784  python3.8 -m venv rust
+  785  source rust/bin/activate
+  786  python --version
+  787  cd rust
+  788  rm -rf lib64
+  789  rm -rf bin
+  790  python3.8 -m venv devnet
+  791  source devnet/bin/activate
+  792  pip install starknet-devnet
+  793  exit
+  794  scarb tun
+  795  scarb run
+  796  clear
+  797  scarb run
+  798  scarb run cairo
+  799  katana
+  800  exit$ cargo install --git https://github.com/0xSpaceShard/starknet-devnet-rs.git --locked
+  801  cargo install --git https://github.com/0xSpaceShard/starknet-devnet-rs.git --locked
+  802  cargo install --git https://github.com/0xSpaceShard/starknet-devnet-rs.git
+  803  cargo install starknet-devnet
+  804  cargo install starknet-devnet
+  805  ps aux | grep cargo
+  806  ps -o ppid= -p 11797
+  807  cargo install starknet-devnet
+  808  rm -f ~/.cargo/.package-cache-lock
+  809  cargo install starknet-devnet
+  810  sudo mongod --bind_ip 0.0.0.0 --dbpath /data/db --replSet rs0
+  811  nano ~/.bashrc
+  812  start_mongo
+  813  clear
+  814  scarb new gidaerc20
+  815  code .
+  816  rm dir gidaerc20
+  817  rm -rf gidaerc20
+  818  cd programming/rust/
+  819  scarb new gidaerc20
+  820  cd gidaerc20/
+  821  code .
+  822  npm run dev
+  823  start_mongo
+  824  git add .
+  825  git commit -m "minor update"
+  826  git push -u origin dev
+  827  curl http://localhost:3000/api/test
+  828  ifconfig
+  829  curl http://localhost:3000/api/test
+  830  curl http://192.168.72.198:3000/api/test
+  831  curl http://192.168.79.255:3000/api/test
+  832  curl http://1010:3000/api/test
+  833  curl http://192.168.79.255:3000/api/test
+  834  curl http://192.168.72.198:3000/api/test
+  835  http://192.168.72.198:3000/api/test?url=TqDn4m-QEFs
+  836  curl http://192.168.72.198:3000/api/test?url=TqDn4m-QEFs
+  837  git add .
+  838  git commit -m "minor update"
+  839  git push -u origin dev
+  840  which cairo-lang
+  841  pip install cairo-lang
+  842  cd ..
+  843  source devnet/bin/activate
+  844  pip install cairo-lang
+  845  which cairo-lang
+  846  pip install cairo-lang
+  847  which cairo-lang
+  848  exit
+  849  which cairo-lang
+  850  pip install cairo-lang
+  851  python3 -m venv cairo-env
+  852  source cairo-env/bin/activate
+  853  pip install cairo-lang
+  854  which cairo-lang
+  855  source cairo-env/bin/activateexit
+  856  exit
+  857  which cairo-lang
+  858  exit
+  859  cairo-compile --version
+  860  pip install cairo-ls
+  861  cd..
+  862  cd ..
+  863  python3 -m venv cairo-env
+  864  source cairo-env/bin/activateexit
+  865  source cairo-env/bin/activate
+  866  pip install cairo-ls
+  867  exit
+  868  cd ..
+  869  cd cairo
+  870  cd ..
+  871  cd cargo
+  872  cd ..
+  873  cd cairo
+  874  cd cairo && cargo test
+  875  cd cargo test
+  876  cd cargo 
+  877  git clone https://github.com/starkware-libs/cairo
+  878  cd cairo
+  879  cd ..
+  880  cd cairo && cargo  test
+  881  cd ..
+  882  rustup install nightly-2024-04-23
+  883  cd cairo && cargo  test
+  884  cd cairo/
+  885  cargo clean
+  886  cargo test
+  887  cd cairo && cargo  test
+  888  clear
+  889  cd ..
+  890  sudo apt update
+  891  sudo apt install build-essential
+  892  which cc
+  893  which gcc
+  894  cargo clean
+  895  rustup update
+  896  export RUSTFLAGS="-C link-arg=-fuse-ld=lld"
+  897  cargo build --verbose
+  898  sudo apt install build-essential
+  899  cargo clean
+  900  cargo testv
+  901  cargo test
+  902  cargo clean
+  903  cd ~
+  904  ls | grep cairo
+  905  techdoc@TECHDOC:~$ ls | grep cairo
+  906  cairo
+  907  techdoc@TECHDOC:~$ ls | grep cairo
+  908  cairo
+  909  cd cairo
+  910  ls
+  911  cargo test
+  912  cd ..
+  913  sudo apt install build-essential pkg-config libssl-dev
+  914  cargo clean
+  915  cargo test
+  916  cd cairo/
+  917  cargo clean
+  918  cargo test
+  919  cd ..
+  920  clear
+  921  sudo apt install gcc make cmake
+  922  cd cairo/
+  923  cargo clean
+  924  cargo test
+  925  cd ..
+  926  cd cairo && cargo  test
+  927  apt install libglib2.0-dev
+  928  cd ..
+  929  apt install libglib2.0-dev
+  930  sudo apt install libglib2.0-dev
+  931  cd cairo && cargo  test
+  932  cd ..
+  933  rustup toolchain uninstall stable
+  934  rustup install nightly-2024-04-23
+  935  rustup default nightly-2024-04-23
+  936  rustc --version
+  937  # Should show nightly-2024-04-23
+  938  cd ~/cairo
+  939  cargo test
+  940  cd ..
+  941  rustup override set stable
+  942  rustup update
+  943  cd ~
+  944  rm -rf cairo
+  945  git clone https://github.com/starkware-libs/cairo
+  946  cd cairo
+  947  cd cairo && cargo test
+  948  cargo clean
+  949  cd cairo && cargo test
+  950  sudo apt-get install -y asdf
+  951  exit
+  952  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
+  953  . "$HOME/.asdf/asdf.sh"
+  954  . "$HOME/.asdf/completions/asdf.bash"
+  955  asdf install scarb latest:nightly
+  956  asdf local scarb latest:nightly
+  957  asdf
+  958  git clone https://github.com/starkware-libs/cairo
+  959  cd cairo/
+  960  rustup install nightly-2024-04-23
+  961  pwd
+  962  rustup override set stable
+  963  rustup override set stablecd cairo
+  964  rustup override set nightly-2024-04-23
+  965  cargo test
+  966  cd ..
+  967  sudo apt install software-properties-common 
+  968  sudo add-apt-repository ppa:deadsnakes/ppa 
+  969  sudo apt update
+  970  python -m venv cairo_venv
+  971  python3 -m venv cairo_venv
+  972  python3 --version
+  973  source cairo_venv/bin/activate
+  974  sudo apt install -y libgmp3-dev
+  975  sudo apt-get install gcc python3.12.3-dev 
+  976  sudo apt-get install gcc python3-dev 
+  977  pip3 install ecdsa fastecdsa sympy
+  978  pip3 install cairo-lang
+  979  asdf plugin add scarb 
+  980  asdf install scarb latest 
+  981  asdf global scarb latest
+  982  $ scarb --version
+  983  scarb 2.8.3 (54938ce3b 2024-09-26)
+  984  cairo: 2.8.2 (https://crates.io/crates/cairo-lang-compiler/2.8.2)
+  985  sierra: 1.6.0
+  986  $ scarb --version
+  987  scarb --version
+  988  snforge --version
+  989  rustup override set stable && rustup update
+  990  git clone https://github.com/starkware-libs/cairo
+  991  cd cairo && cargo test
+  992  sncast -help
+  993  sncast account -help
+  994  sncast account add -help
+  995  sncast account import -help
+  996  sncast account import --address 0x3d1390d289a82bb59b857f098a7bec5157d3b691f4b7246ca4d5c4de821321b --private-key 0x000000000000000000000000000000006952f7dc43434514a24f7e560cb616b5 --url http://127.0.0.1:5050
+  997  sncast account import --address 0x3d1390d289a82bb59b857f098a7bec5157d3b691f4b7246ca4d5c4de821321b --private-key 0x000000000000000000000000000000006952f7dc43434514a24f7e560cb616b5 --url http://127.0.0.1:5050 --type oz --name tim-account --add-profile dev-profile
+  998  sncast declare -help
+  999  sncast declare -h
+ 1000  sncast declare -help
+ 1001  sncast declare --help
+ 1002  sncast declare  -c erc20
+ 1003  sncast declare  -c erc20 -u http://127.0.0.1:5050  --c strk
+ 1004  sncast declare  -c erc20 -u http://127.0.0.1:5050  --fee-token strk
+ 1005  sncast declare   --contract-name erc20 -u http://127.0.0.1:5050  --fee-token strk
+ 1006  sncast declare  --contract-name erc20 -url http://127.0.0.1:5050  --fee-token strk
+ 1007  sncast declare  --contract-name erc20 --url http://127.0.0.1:5050  --fee-token strk
+ 1008  sncast declare  --contract-name erc20 --urprofile dev-profile--fee-token strk
+ 1009  sncast declare  --contract-name erc20 --profile dev-profile --fee-token strk
+ 1010  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strk
+ 1011  sncast declare  --contract-name erc20 --profile dev-profile --fee-token strk
+ 1012  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strk
+ 1013  exit
+ 1014  . "$HOME/.asdf/asdf.sh"
+ 1015  asdf
+ 1016  asdf install scarb latest:nightly
+ 1017  asdf local scarb latest:nightly
+ 1018  asdf install scarb latest:nightly
+ 1019  asdf install scarb
+ 1020  asdf install scarb latest:nightly
+ 1021  asdf list-all scarb
+ 1022  asdf plugin add scarb
+ 1023  asdf list-all scarb
+ 1024  asdf install scarb latest:nightly
+ 1025  scarb --version
+ 1026  echo $PATH
+ 1027  export PATH=$(echo "$PATH" | sed -e 's:/path/to/scarb/bin:g')
+ 1028  cd .local/bin/
+ 1029  rm scarb
+ 1030  rm -rf scarb
+ 1031  rm
+ 1032  rm scarb
+ 1033  rm "\\wsl.localhost\Ubuntu\home\techdoc\.local\bin\scarb"
+ 1034  cd ~
+ 1035  asdf install scarb latest
+ 1036  asdf
+ 1037  cd .local/bin/
+ 1038  rm scarb
+ 1039  asdf install scarb latest
+ 1040  asdf
+ 1041  asdf
+ 1042  source cairo_venv/bin/activate
+ 1043  asdf
+ 1044  scarb test
+ 1045  starknet-devnet
+ 1046  sncast account import --address 0x2620e2cf95bba919e000497871c73b732348843950ee64f5852d26947ea522 --private-key  0x000000000000000000000000000000001b0fd4ce550667596cd90f2912669853 --url http://127.0.0.1:5050 --type oz --name tim-account --add-profile dev-profile
+ 1047  rm -rf  /home/techdoc/.starknet_accounts/
+ 1048  sncast account import --address 0x2620e2cf95bba919e000497871c73b732348843950ee64f5852d26947ea522 --private-key  0x000000000000000000000000000000001b0fd4ce550667596cd90f2912669853 --url http://127.0.0.1:5050 --type oz --name tim-account --add-profile dev-profile
+ 1049  rm -rf  /home/techdoc/.starknet_accounts/
+ 1050  sncast account import --address 0x2620e2cf95bba919e000497871c73b732348843950ee64f5852d26947ea522 --private-key  0x000000000000000000000000000000001b0fd4ce550667596cd90f2912669853 --url http://127.0.0.1:5050 --type oz --name tim-account --add-profile dev-profile
+ 1051  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strk
+ 1052  scarb
+ 1053  scarb --version
+ 1054  s
+ 1055  asdf
+ 1056  cd ..
+ 1057  asdf
+ 1058  asdf
+ 1059  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strk
+ 1060  starknet-devnet 
+ 1061  scarb build
+ 1062  rustup
+ 1063  cairo
+ 1064  asdf install scarb latest:nightly
+ 1065  scarb --version
+ 1066  snforge
+ 1067  clear
+ 1068  scarb test
+ 1069  chmod +x /home/techdoc/.asdf/installs/scarb/2.8.4/bin/*
+ 1070  chmod +x /home/techdoc/.asdf/installs/scarb/2.8.4/bi/*
+ 1071  chmod +x /home/techdoc/.asdf/installs/scarb/2.8.4/bin/*
+ 1072  git clone https://github.com/starkware-libs/cairo
+ 1073  cd ..
+ 1074  git clone https://github.com/starkware-libs/cairo
+ 1075  sncast account import --address 0x3f41c9de3be151fa6c1c6e42e3a49d7183dd20167d48ffd39c702561817b8f --private-key  0x00000000000000000000000000000000aae7267d84f9d3c98ad24fcc7de110b3 --url http://127.0.0.1:5050 --type oz --name tim-account --add-profile dev-profile
+ 1076  rm -rf /home/techdoc/.starknet_accounts/
+ 1077  sncast account import --address 0x3f41c9de3be151fa6c1c6e42e3a49d7183dd20167d48ffd39c702561817b8f --private-key  0x00000000000000000000000000000000aae7267d84f9d3c98ad24fcc7de110b3 --url http://127.0.0.1:5050 --type oz --name tim-account --add-profile dev-profile
+ 1078  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strk
+ 1079  scarb --version
+ 1080  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strk
+ 1081  warn: `edition` field not set in `[package]` section for package `empty_lib`
+ 1082  warn: `edition` field not set in `[package]` section for pa
+ 1083  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strk
+ 1084  starknet
+ 1085  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strk
+ 1086  cd ..
+ 1087  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strk
+ 1088  cncast
+ 1089  sncast
+ 1090  hich clear
+ 1091  scarb test
+ 1092  scarb test
+ 1093  sncast --profile dev-profile declare  --contract-name erc20  --fee-token strkc
+ 1094  crgo
+ 1095  cargo
+ 1096  cargo install cairo-language-server
+ 1097  which  cairo-language-server
+ 1098  nano ~/.bashrc 
+ 1099  source ~/.bashrc
+ 1100  echo $PATH
+ 1101  cairo-language-server 
+ 1102  scarb init -help
+ 1103  mkdir token-value
+ 1104  cd token-value/
+ 1105  scarb init
+ 1106  cd ..
+ 1107  rm -rf token-value/
+ 1108  cd ..
+ 1109  mkdir token_value
+ 1110  cd token_value/
+ 1111  scarb init
+ 1112  which cairo-language-server 
+ 1113  starknet-devnet 
+ 1114  scarb init
+ 1115  clear
+ 1116  which scarb
+ 1117  asdf plugin add scarb
+ 1118  . "$HOME/.asdf/asdf.sh"
+ 1119  . "$HOME/.asdf/asdf.s"
+ 1120  asdf install scarb latest
+ 1121  asdf global scarb latest
+ 1122  . "$HOME/.asdf/asdf.s"
+ 1123  asdf install scarb latest
+ 1124  nano ~/.bashrc
+ 1125  source ~/.bashrc
+ 1126  asdf
+ 1127  asdf local scarb
+ 1128  scarb --v
+ 1129  scarb --version
+ 1130  cd programming/rust/gidaerc20/
+ 1131  asdf local scarb 2.8.4
+ 1132  asdf
+ 1133  scard
+ 1134  scarb
+ 1135  scarb --version
+ 1136  which scl-server
+ 1137  find / -name "*scl*" 2>/dev/null
+ 1138  clear
+ 1139  scarb cairo-language-server
+ 1140  which cairo-language-server
+ 1141  cd techdoc\cairo\vscode-cairo
+ 1142  cd cairo\vscode-cairo
+ 1143  cd cairo/vscode-cairo
+ 1144  code .
+ 1145  cd ..
+ 1146  cd..
+ 1147  cd ..
+ 1148  scarb build
+ 1149  scarb --version
+ 1150  ~/.asdf/installs/scarb/nightly/bin/scarb-cairo-language-server --version
+ 1151  ~/.asdf/installs/scarb/nightly-2024-11-13/bin/scarb-cairo-language-server --version
+ 1152  echo 'export PATH="$PATH:/home/techdoc/.asdf/installs/scarb/nightly-2024-11-13/bin"' >> ~/.bashrc
+ 1153  source ~/.bashrc
+ 1154  ~/.asdf/installs/scarb/nightly-2024-11-13/bin/scarb-cairo-language-server --version
+ 1155  ~/.asdf/installs/scarb/nightly/bin/scarb-cairo-language-server -vv
+ 1156  ~/.asdf/installs/scarb/nightly-2024-11-13/bin/scarb-cairo-language-server -vv
+ 1157  cd ..
+ 1158  mkdir intro_to_components
+ 1159  cd intro_to_components/
+ 1160  scarb init
+ 1161  code .
+ 1162  scarb test
+ 1163  scarb new cairo_project
+ 1164  rm -rf cairo_project/
+ 1165  cd ..
+ 1166  scarb new cairo_project
+ 1167  cd cairo
+ 1168  cd ..
+ 1169  cd cairo_project/
+ 1170  cd ..
+ 1171  code cairo_project/
+ 1172  scarb build
+ 1173  cd ..
+ 1174  rm -rf cairo_project/
+ 1175  scarb new cairo_project
+ 1176  cd cairo_project/
+ 1177  code 
+ 1178  code .
+ 1179  scarb build
+ 1180  scarb cairo-run
+ 1181  scarb cairo-test
+ 1182  scarb fmt
+ 1183  scarb check
+ 1184  scarb build
+ 1185  scarb cairo_test
+ 1186  scarb cairo-test
+ 1187  scarb cairo-test --include-ignored
+ 1188  scarb cairo-test -f test_pow
+ 1189  scarb cairo-test 
+ 1190  cd ..
+ 1191  mkdir hello_starknet;cd hello_starknet
+ 1192  scarb init
+ 1193  code .
+ 1194  cd ..
+ 1195  cd crosscontract/
+ 1196  code .
+ 1197  cd ..
+ 1198  code crosscontract/
+ 1199  cd hello_starknet/
+ 1200  scarb build
+ 1201  cd ..
+ 1202  cd crosscontract/
+ 1203  code .
+ 1204  snforge test
+ 1205  cd ..
+ 1206  gh repo clone Oshioke-Salaki/GIDA-Cairo-Bootcamp-Frontend frontend-cairo
+ 1207  git@github.com:Oshioke-Salaki/GIDA-Cairo-Bootcamp-Frontend.git 
+ 1208  ssh -T git@github.com
+ 1209  ssh -help
+ 1210  ssh -T git@github.com:Oshioke-Salaki/GIDA-Cairo-Bootcamp-Frontend.git
+ 1211  git clone https://github.com/Oshioke-Salaki/GIDA-Cairo-Bootcamp-Frontend.git
+ 1212  cd GIDA-Cairo-Bootcamp-Frontend/
+ 1213  CODE .
+ 1214  npm i
+ 1215  npm i --legacy-peer-deps
+ 1216  npm i --legacy-peer-dep
+ 1217  cd student-registry-dapp-starter/
+ 1218  npm i
+ 1219  npm i --legacy-peer-deps
+ 1220  npm un dev
+ 1221  npm run dev
+ 1222  checkout in-class
+ 1223  cd ..
+ 1224  mkdir projects; cd projects
+ 1225  mkdir social_trading; cd social_trading
+ 1226  scarb init
+ 1227  code .
+ 1228  cd ..
+ 1229  cd crosscontract/
+ 1230  code ;
+ 1231  code .
+ 1232  cd ..
+ 1233  cd crosscontract/
+ 1234  code .
+ 1235  git init
+ 1236  git add .
+ 1237  git commit -m "initial commit"
+ 1238  git add .
+ 1239  git commit -m "second commit"
+ 1240  git add .
+ 1241  git commit -m "second commit"
+ 1242  scarb test
+ 1243  clear
+ 1244  scarb test
+ 1245  RUSTFLAGS="-Awarnings" scarb test
+ 1246  cd ..
+ 1247  cargo new bigint_test
+ 1248  code bigint_test/
+ 1249  cargo run
+ 1250  scarb test
+ 1251  clear
+ 1252  scarb test
+ 1253  clear
+ 1254  scarb test
+ 1255  git add .
+ 1256  git commit -m "test platform token"
+ 1257  scarb test
+ 1258  scarb test -help
+ 1259  scarb test -f test_rep
+ 1260  scarb test --f test_rep
+ 1261  scarb test -help
+ 1262  scarb cairo-test -f test_rep
+ 1263  scarb test -filter test_rep
+ 1264  scarb test --filter test_rep
+ 1265  scarb test test_rep
+ 1266  scarb test test_rep -- -q
+ 1267  scarb test test_rep
+ 1268  scarb test test_rep 
+ 1269  git add .
+ 1270  git commit -m "test reputation system"
+ 1271  scarb test test_pro
+ 1272  scarb test 
+ 1273  scarb test pos
+ 1274  scarb test 
+ 1275  scarb test position_manager
+ 1276  scarb test 
+ 1277  git add .
+ 1278  git commit -m "test position manager done" 
+ 1279  npm install --save-dev jest @types/jest ts-jest
+ 1280  ifconfig
+ 1281  npm install mongodb-memory-server --save-dev
+ 1282  npm i
+ 1283  npm i @solana/wallet-adapter-wallets
+ 1284  npm audit`
+ 1285  npm audit`
+ 1286  npm audit`
+ 1287  npm audit
+ 1288  npm audit
+ 1289  npm audit fix
+ 1290  mongocommect
+ 1291  mongostat
+ 1292  source ~/.bashrc
+ 1293  nano ~/.bashrc
+ 1294  start monog
+ 1295  nano ~/.bashrc
+ 1296  start_mongo
+ 1297  git checkout timdev
+ 1298  git checkout tim-dev
+ 1299  git pull tim-dev
+ 1300  git pull -u origin tim-dev
+ 1301  npm i 
+ 1302  clear
+ 1303  npm i 
+ 1304  npm run dev
+ 1305  npm i  @types/mongodb-memory-serve
+ 1306  npm i --save-dev mongodb-memory-server 
+ 1307  npm install --save-dev jest @types/jest
+ 1308  npm run test
+ 1309  cls
+ 1310  clear
+ 1311  npm run test
+ 1312  npm install --save-dev ts-jest
+ 1313  npm run test
+ 1314  cat /etc/mongod.conf
+ 1315  history
+ 1316  history > history.txt

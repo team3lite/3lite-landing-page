@@ -8,6 +8,7 @@ import blockImage from "../assets/images/block.png";
 import HeroOverlay from "./HeroOverlay";
 import { useWalletModal, WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useWallet } from "@solana/wallet-adapter-react";
+import WalletConnectionHandler from "./WalletButton";
 
 
 
@@ -45,7 +46,7 @@ const HeroEdited = () => {
               </p>
 
               <div className="flex flex-col md:flex-row gap-3">
-                <WalletMultiButton style={{}} />
+              <WalletConnectionHandler/>
                 <button  className="bg-brand-light px-4 py-2 rounded-lg">Launch Bot</button>
                 <button className="bg-[#C2C0F3] px-4 py-2 rounded-lg text-brand">Join community</button>
               </div>

@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "sonner";
 import AppWalletProvider from "./components/WalletFeature";
+import { AuthProvider } from "./providers/AuthContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -45,7 +46,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} w-screen overflow-x-hidden antialiased`}
       >
-        <AppWalletProvider>{children}</AppWalletProvider>
+        <AuthProvider>
+          <AppWalletProvider>{children}</AppWalletProvider>
+        </AuthProvider>
         <Toaster />
       </body>
     </html>
