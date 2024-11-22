@@ -9,3 +9,6 @@ export const validateUserInput = (input:string[]) => {
     
   
   }
+  export function escapeRegex(text: string): string {
+    return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // Escapes special regex characters
+}

@@ -3,9 +3,13 @@ import { createUser } from "@/actions/dbFunctions";
 import useAuth from "@/hooks/useAuth";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const WalletConnectionHandler = () => {
+    const pathname=usePathname();
+    const router=useRouter()
+    console.log({pathname})
     const { publicKey, connected } = useWallet();
     const [userData, setUserData] = useState<{
       walletAddress?: string;
@@ -31,7 +35,11 @@ const WalletConnectionHandler = () => {
                   walletType: walletDetails.walletType,
                   connectionTimestamp: walletDetails.connectionTimestamp
                 })
+
                 setUser(JSON.parse(newUser))
+                if(pathname=="/login"||pathname=="/signup"){
+                  router.push("/chat")
+                }
                 console.log({newUser})
             // 2. Store in database
             // const storedUser = await db.user.upsert({

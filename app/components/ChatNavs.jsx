@@ -20,6 +20,7 @@ import {  useState } from "react";
 import { useChatContext } from "@/hooks/useChatContext";
 import { useWallet } from "@solana/wallet-adapter-react";
 import SideBar from "@/components/Sidebar";
+import useAuth from "@/hooks/useAuth";
 
 export default function Component({ children }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -50,7 +51,7 @@ export default function Component({ children }) {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <div className="sm:text-sm text-xs flex cursor-pointer text-gray-500">
-                          {publicKey?.toBase58().slice(0, 10)}
+                          {activeUser?.walletAddress?.slice(0, 10)}
                           <ChevronDown className="inline ml-1" size={16} />
                         </div>
                       </TooltipTrigger>

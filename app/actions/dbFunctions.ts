@@ -3,6 +3,7 @@ import dbConnect from "@/lib/db/dbConnect";
 import { Chat } from "@/lib/db/models/chat";
 import { Message } from "@/lib/db/models/message";
 import { User } from "@/lib/db/models/user";
+import { escapeRegex } from "@/lib/utils/helpers";
 
 
 
@@ -10,7 +11,8 @@ import { User } from "@/lib/db/models/user";
 export const getUsersFromRegex = async (regex: string) => {
     await dbConnect();
     console.log({regex})
-     const resp=await User.getUsersFromRegex({ regex });
+    const filteredTest=escapeRegex(regex)
+     const resp=await User.getUsersFromRegex({ regex:filteredTest });
      console.log({resp})
   return JSON.stringify(resp);
 }
