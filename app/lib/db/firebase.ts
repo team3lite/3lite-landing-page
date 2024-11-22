@@ -8,7 +8,7 @@ import {
   serverTimestamp,
   remove,
   update, 
-  connectDatabaseEmulator
+  connectDatabaseEmulator 
 } from 'firebase/database';
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -28,7 +28,7 @@ const database = getDatabase(app);
 const storage = getStorage(app);
 
 // Connect to local emulators
-connectDatabaseEmulator(database, 'localhost', 9000);
+// connectDatabaseEmulator(database, 'localhost', 9000);
 export { 
     database, 
     storage, 

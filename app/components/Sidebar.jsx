@@ -17,7 +17,7 @@ import useAuth from "@/hooks/useAuth";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { activeUser, setActiveUser } = useChatContext();
-  const {user}=useAuth()
+  const {activeUser:user}=useAuth()
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -27,14 +27,18 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     async (userRegex) => {
       setIsFetching(true);
       setSearchResults([]);
-      await getUsersFromRegex(userRegex)
+       getUsersFromRegex(userRegex)
         .then((users) => {
           console.log("userrrr",user)
           console.log(JSON.parse(users),
-          user._id,"sss"
+          user?._id,"sss"
         )
+        if(!user?._id){
+          setIsFetching(false);
+          return
+        }
           const parsedUsers = JSON.parse(users).filter(
-            (user) => user._id.toString() !== user._id
+            (thisUser) => thisUser._id.toString() !== user._id
           );
           setIsFetching(false);
           setSearchResults(parsedUsers);
@@ -54,6 +58,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const getAllChats = async () => {
     const chats = await getChats(TESTUSERID);
+    setActiveUser(JSON.parse(chats)[0])
+    console.log(JSON.parse(chats))
     setCurrChats(JSON.parse(chats));
   }
 

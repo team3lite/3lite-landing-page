@@ -37,14 +37,14 @@ const ChatList = () => {
       try {
         setIsLoading(true);
 
-        if (!activeUser?.username) return;
-
-        const userId = await getUserIdFromUsername(activeUser.username);
-        const chatData = await getChat(user._id, userId);
+        console.log({activeUser})
+        if (!activeUser?._id) return;
+        const chatData = await getChat(user._id, activeUser._id);
         const parsedChat = JSON.parse(chatData);
-
+console.log({parsedChat})
         if (!parsedChat?._id) {
           setChatId(null);
+          setMessages([])
           return
         };
 
