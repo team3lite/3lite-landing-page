@@ -13,7 +13,7 @@ import { ItestChat, ItestMessage } from "@/tests/unit/firebase.test";
 import mongoose from "mongoose";
 
 export class FirebaseChat {
-  static async syncMessage(message: Partial<ItestMessage>) {
+  static async syncMessage(message: Partial<IMessage>) {
 
 
     const sanitizedMessage = {
@@ -38,7 +38,7 @@ export class FirebaseChat {
     });
   }
 
-  static async syncChat(chat: ItestChat) {
+  static async syncChat(chat: IChat) {
     console.log({chat: `chats/${chat._id.toString()}/info`})
     const chatRef = ref(database, `chats/${chat._id.toString()}/info`);
     //consrvert object ids to strings
@@ -60,11 +60,11 @@ export class FirebaseChat {
 
   static subscribeToChat(
     chatId: string,
-    callback: (messages: ItestMessage[]) => void
+    callback: (messages: IMessage[]) => void
   ) {
     const chatRef = ref(database, `chats/${chatId.toString()}/messages`);
     return onValue(chatRef, (snapshot) => {
-      const messages: ItestMessage[] = [];
+      const messages: IMessage[] = [];
       snapshot.forEach((childSnapshot) => {
         const message = childSnapshot.val();
         messages.push({
@@ -80,11 +80,11 @@ export class FirebaseChat {
 
   static subscribeToUserChats(
     userId: string,
-    callback: (chats: ItestChat[]) => void
+    callback: (chats: IChat[]) => void
   ) {
     const userChatsRef = ref(database, "chats");
     return onValue(userChatsRef, (snapshot) => {
-      const chats: ItestChat[] = [];
+      const chats: IChat[] = [];
       snapshot.forEach((childSnapshot) => {
         const chat = childSnapshot.child("info").val();
 
