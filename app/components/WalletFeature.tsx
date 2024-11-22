@@ -29,12 +29,15 @@ export default function AppWalletProvider({
     ],
     [network],
   );
- 
+
+
+  
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>{children}</WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
+
   );
 }

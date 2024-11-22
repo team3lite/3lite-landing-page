@@ -1,6 +1,17 @@
 "use server";
 import { UserModel, User, Users } from "../models/user";
 import dbConnect from "../dbConnect";
+import {dummyUsers} from "../../../data"
+export type IuserData = {
+  email: string;
+  username: string;
+  password?: string;
+  authType: "local" | "google";
+  status: "online" | "offline";
+  lastSeen: Date;
+  credentials: boolean;
+  walletAddress?:string;
+}
 export const createUserWithGoogle = async function (
   profile: Partial<{
     id: string;
@@ -27,15 +38,16 @@ export const createUserWithGoogle = async function (
   });
 };
 export const createUserWithEmail = async function (data: Partial<Users>) {
+  await dbConnect();
   const { email, username, password } = data;
   // Validate required fields
   if (!email || !username) {
     throw new Error("Please provide all required fields");
   }
   // Create new user with Google auth
-  await dbConnect();
+  //await dbConnect();
   // Check if email or username already exists
-  const existingUser = await (User as UserModel).findOne({
+  const existingUser = await User.findOne({
     $or: [{ email }, { username }],
   });
 
@@ -47,11 +59,16 @@ export const createUserWithEmail = async function (data: Partial<Users>) {
     );
   }
   //
-  await (User as UserModel).create({
-    ...data,
-    authType: "local",
-    credentials: true,
-  });
+  dummyUsers.forEach(async (user) => {
+  
+    await User.createUser(user as IuserData);
+  }
+)
+  // await (User as UserModel).create({
+  //   ...data,
+  //   authType: "local",
+  //   credentials: true,
+  // });
   return "User created successfully";
 };
 
@@ -65,23 +82,38 @@ export const loginWithEmail = async function (data: {
   }
   // Create new user with Google auth
   await dbConnect();
-  const user = await (User as UserModel).validateLogin({
-    email,
-    password,
-  });
-  console.log("Email fsd", email);
-  if (!user) {
+  try{
+
+    const user = await (User as UserModel).validateLogin({
+      email,
+      password,
+    });
+
+    console.log({user},"user found")
+
+    return {id: user._id, username: user.username, email: user.email};
+  } 
+  catch(err){
+    //if it failed check if the user created with google
+    const user = await (User as UserModel).findOne({
+      email,
+      authType: "google",
+    });
+    if (user) {
+
+      throw new Error("User already exists with google account, please login with google");
+    }
     throw new Error("User not found");
   }
-  console.log("User found", user);
+  
 
-  return "success";
+
 };
 export const loginWithGoogle = async function (data: {
   id: string;
   email: string;
   name: string;
-}): Promise<string> {
+}) {
   const { id, email, name } = data;
   if (!id || !email || !name) {
     throw new Error("Please provide all required fields");
@@ -93,7 +125,7 @@ export const loginWithGoogle = async function (data: {
     $and: [{ email }, { googleId: id }],
   });
   //if no user found create new user
-  console.log({ user });
+  
 
   if (!user) {
     //check if user with email exists
@@ -107,5 +139,7 @@ export const loginWithGoogle = async function (data: {
       authType: "both",
     });
   }
-  return "User logeg in successfully";
+
+  return {id: user._id, username: user.username, email: user.email};
+
 };

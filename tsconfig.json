@@ -40,6 +40,6 @@
     "app/components/HeaderComponent.jsx",
     "app/pages/Homepage.jsx",
     "app/components/BottomColor.jsx"
-, "app/(auth)/layout.jsx", "app/(auth)/_components/AuthMattedBackground.jsx", "app/components/ChatList.jsx","app/components/ChatNavs.jsx"  ],
+, "app/(auth)/layout.jsx", "app/(auth)/_components/AuthMattedBackground.jsx", "app/components/ChatList.tsx","app/components/ChatNavs.jsx"  ],
   "exclude": ["node_modules"]
 }

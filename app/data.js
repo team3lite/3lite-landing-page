@@ -54,3 +54,106 @@ export const FeaturesDetails = [
     href: "#",
   },
 ];
+
+
+
+export const dummyUsers =[
+   {
+    email: "test@example.com",
+    username: "testuser",
+    password: "StrongPass123!",
+    authType: "local",
+    status: "online",
+    lastSeen: new Date(),
+    credentials: true,
+  },
+  {
+    email: "test2@example.com",
+    username: "test2user",
+    password: "StrongPass123!",
+    authType: "local",
+    status: "online",
+    lastSeen: new Date(),
+    credentials: true,
+  },
+  {
+    email: "john.doe@example.com",
+    username: "johndoe",
+    password: "SecurePass456!",
+    authType: "local",
+    status: "offline",
+    lastSeen: new Date(),
+    credentials: true,
+  },
+  {
+    email: "alice.smith@example.com",
+    username: "alicesmith",
+    password: "SafePass789!",
+    authType: "local",
+    status: "online",
+    lastSeen: new Date(),
+    credentials: true,
+  },
+  {
+    email: "bob.jones@example.com",
+    username: "bjones",
+    password: "BobPass321!",
+    authType: "local",
+    status: "offline",
+    lastSeen: new Date(),
+    credentials: true,
+  },
+  {
+    email: "sarah.wilson@example.com",
+    username: "swilson",
+    password: "WilsonPass987!",
+    authType: "local",
+    status: "online",
+    lastSeen: new Date(),
+    credentials: true,
+  },
+  {
+    email: "mike.brown@example.com",
+    username: "mbrown",
+    password: "BrownPass654!",
+    authType: "local",
+    status: "offline",
+    lastSeen: new Date(),
+    credentials: true,
+  }
+]
+
+export   const initialChats =  [
+  {
+    id: 1,
+    message: "Welcome to 3lite Messenger",
+    time: "12:34 PM",
+    type: "received",
+  },
+  {
+    id: 2,
+    message:
+      "Experience secure, decentralized communication built on the Sui Blockchain",
+    time: "12:34 PM",
+    type: "received",
+  },
+  {
+    id: 3,
+    type: "sent",
+    message: "tell me more",
+    time: "12:34 PM",
+  },
+  {
+    id: 4,
+    type: "sent",
+    message:
+      "3lite Messenger is a decentralized chat application built on the Sui blockchain",
+    time: "12:34 PM",
+  },
+  {
+    id: 5,
+    type: "received",
+    message: "And it is still under development",
+    time: "12:34 PM",
+  },
+]

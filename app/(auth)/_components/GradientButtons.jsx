@@ -18,9 +18,9 @@ const GradientButtons = ({ text, children, ...props }) => {
             "conic-gradient(from 270deg at 50% 50%, #4B0082 0deg, #C71585 48.25deg, #4B0082 260deg)",
         }}
       >
-        <div className="" id="dds">
+        <span className="" id="dds">
           {children}
-        </div>
+        </span>
         <span className="relative text-left bg-n-200 grow  px-4 py-3 font-medium text-white text-sm">
           {text}
         </span>
