@@ -17,15 +17,7 @@ const PrivacyPolicy = () => {
       <h2 className="text-3xl font-semibold mb-3 text-blue-600">
         1. Information We Collect
       </h2>
-      <p className="mb-2">
-        When you use Google Auth to sign into the App, we may collect the
-        following personal information:
-      </p>
-      <ul className="list-disc list-inside mb-4 pl-5">
-        <li>Your Google account email address.</li>
-        <li>Your full name as provided in your Google account.</li>
-        <li>Your Google profile picture (optional).</li>
-      </ul>
+  
 
       <p className="mb-4">
         Rest assured, we do not collect or store your Google password. The
