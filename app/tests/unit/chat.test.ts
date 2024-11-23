@@ -34,32 +34,29 @@ describe("Chat Model", () => {
     await Chat.deleteMany({});
     // await Message.deleteMany({});
     user1 = await User.createUser({
-      email: "user1@test.com",
-      username: "user1",
-      password: "Pass123!",
-      authType: "local",
+      username: "receiver",
+      walletType: "solflare",
       status: "online",
+        connectionTimestamp: new Date(),
       lastSeen: new Date(),
-      credentials: true,
+      walletAddress: "receiverwallet",
     });
 
     user2 = await User.createUser({
-      email: "user2@test.com",
-      username: "user2",
-      password: "Pass456!",
-      authType: "local",
+      walletType: "sender@test.com",
+      username: "sender",
+      connectionTimestamp: new Date(),
       status: "online",
       lastSeen: new Date(),
-      credentials: true,
+      walletAddress: "senderWallt",
     });
     user3 = await User.createUser({
-      email: "user3@test.com",
-      username: "user3",
-      password: "Pass789!",
-      authType: "local",
+      walletType: "sender3@test.com",
+      username: "sender3",
+      connectionTimestamp: new Date(),
       status: "online",
       lastSeen: new Date(),
-      credentials: true,
+      walletAddress: "sender3Wallt",
     });
   });
 

@@ -14,24 +14,20 @@ jest.mock("../../class/firebase_chat", () => ({
 }));
 
 const receiverData: IuserData = {
-  email: "receiver@test.com",
   username: "receiver",
-  password: "Pass123!",
-  authType: "local",
+  walletType: "solflare",
   status: "online",
+    connectionTimestamp: new Date(),
   lastSeen: new Date(),
-  credentials: true,
   walletAddress: "receiverwallet",
 };
 
 const senderData: IuserData = {
-  email: "sender@test.com",
+  walletType: "sender@test.com",
   username: "sender",
-  password: "Pass123!",
-  authType: "local",
+  connectionTimestamp: new Date(),
   status: "online",
   lastSeen: new Date(),
-  credentials: true,
   walletAddress: "senderWallt",
 };
 
