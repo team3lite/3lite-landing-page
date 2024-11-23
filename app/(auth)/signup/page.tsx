@@ -50,24 +50,7 @@ const Page = () => {
           </div>
         </div>
         <div className="self-stretch h-[164px] flex-col justify-start items-center gap-4 flex">
-          <div className="self-stretch group px-4 py-[15px] bg-[#3a3f52] rounded-xl   ring-0 focus-within:ring-[2px] focus-within:ring-[#5739f2] justify-start items-center gap-2 inline-flex">
-            <PersonIcon className="group-focus-within:stroke-white stroke-slate-400" />
-            <input
-              type="email"
-              id="email_signup"
-              placeholder="team3Lite@gmail.com"
-              className="bg-transparent text-white border-none  outline-none no-underline"
-            />
-            <CircleCheck size={24} className="text-white  fill-[#038654]" />
-          </div>
-          <div className="group self-stretch ring-0 focus-within:ring-[2px] focus-within:ring-[#5739f2]  pl-4 py-[10px] bg-[#3a3f52] rounded-xl justify-start items-center gap-2 inline-flex">
-            <PasswordIcon className="group-focus-within:stroke-white stroke-slate-400" />
-            <PasswordInput
-              id="password_signin"
-              type="password"
-              className="bg-transparent py-1 focus-visible:outline-none  focus-visible:ring-0  text-white border-none  outline-none no-underline"
-            />
-          </div>
+        
           <div className="self-stretch justify-between items-center inline-flex">
             <div className="text-[#858dab] text-sm font-medium font-['Inter'] leading-normal tracking-tight">
               Remember password

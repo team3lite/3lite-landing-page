@@ -10,7 +10,7 @@ import { useChatContext } from "@/hooks/useChatContext";
 import SideBarChat from "@/components/SidebarChat";
 import { ScrollArea } from "./ui/scroll-area";
 import { getChats, getUsersFromRegex } from "@/actions/dbFunctions";
-import { dummyUsers } from "@/data";
+
 import { useDebouncedCallback } from "use-debounce";
 import { TESTUSERID } from "./ChatList";
 import useAuth from "@/hooks/useAuth";

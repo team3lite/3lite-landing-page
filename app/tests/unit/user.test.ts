@@ -201,7 +201,7 @@ describe("Mongoose User Model Tests", () => {
           walletAddress: "nonexistent",
           username: "testuser",
         })
-      ).rejects.toThrow("Email does not exist");
+      ).rejects.toThrow("wallet does not exist");
     });
 
     it("should throw error if username does not match", async () => {
