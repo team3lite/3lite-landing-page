@@ -128,13 +128,17 @@ return JSON.stringify(chats)
 
 export const addMessage = async ({
   chatId,
+  id,
   sender,
   receiver,
+  timestamp,
   message
 }: {
   chatId: string|null;
   sender: string;
+  id:string;
   receiver:string;
+  timestamp:Date;
   message: string;
 }) => {
   await dbConnect();
@@ -142,6 +146,8 @@ export const addMessage = async ({
   const resp=await Message.addMessage({
       chatId,
       sender,
+      id,
+      timestamp,
       receiver,
       content: message,
       contentType: 'text'
