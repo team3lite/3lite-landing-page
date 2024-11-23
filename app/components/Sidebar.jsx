@@ -12,7 +12,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import { getChats, getUsersFromRegex } from "@/actions/dbFunctions";
 
 import { useDebouncedCallback } from "use-debounce";
-import { TESTUSERID } from "./ChatList";
+
 import useAuth from "@/hooks/useAuth";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
@@ -57,7 +57,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
   };
 
   const getAllChats = async () => {
-    const chats = await getChats(TESTUSERID);
+    const chats = await getChats(user?._id);
     setActiveUser(JSON.parse(chats)[0])
     console.log(JSON.parse(chats))
     setCurrChats(JSON.parse(chats));
@@ -124,7 +124,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                       key={id} 
                       setActiveUser={setActiveUser} 
                       user={chat.participants.filter(
-                        (user) => user._id.toString() !== TESTUSERID
+                        (thisUser) => thisUser._id.toString() !== user._id
                       )[0]} 
                     />
                   ))
