@@ -75,9 +75,10 @@ export interface MessageModel extends Model<IMessage> {
   }): Promise<Array<IMessage> | Error>;
   addMessage(data: {
     chatId: string | null;
+    id:string;
     sender: string;
     receiver: string;
-
+    timestamp:Date;
     content: string;
     contentType: "text" | "image" | "file";
   }): Promise<{
@@ -124,12 +125,16 @@ messageSchema.statics.addMessage = async function ({
   chatId = null,
   sender,
   receiver,
+  id,
   content,
+  timestamp,
   contentType,
 }: {
   chatId?: string | null;
   sender: string;
   receiver: string;
+  id:string;
+  timestamp:Date;
   content: string;
   contentType: "text" | "image" | "file";
 }) {
@@ -179,11 +184,12 @@ messageSchema.statics.addMessage = async function ({
         {
           chat:chat._id,
           sender,
+          _id:new mongoose.Types.ObjectId(id),
           receiver,
           content,
           contentType,
           deliveryStatus: "sent",
-          timestamp: new Date(),
+          timestamp,
         },
       ],
       { session }
