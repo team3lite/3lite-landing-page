@@ -63,60 +63,36 @@ const ChatList = () => {
     };
   }, [activeUser?.username]);
 
-  // Improved Firebase subscription with smooth transitions
+  // Updated Firebase subscription with proper timestamp handling
   useEffect(() => {
     let unsubscribe = null;
-    let processedMessageIds = new Set();
 
     const setupFirebaseSubscription = async () => {
       if (!chatId) return;
 
       unsubscribe = FirebaseChat.subscribeToChat(chatId, (updatedMessages) => {
         setMessages((prevMessages) => {
-          const newMessages = [];
-          const seenMessages = new Set();
+          // Process Firebase messages
+          const confirmedMessages = updatedMessages.map(msg => ({
+            ...msg,
+            status: 'sent'
+          }));
 
-          // Process Firebase messages first
-          updatedMessages.forEach(fbMsg => {
-            const msgKey = `${fbMsg.content}-${fbMsg.sender}`;
-            seenMessages.add(msgKey);
+          // Find pending messages that haven't been confirmed
+          const pendingMessages = prevMessages.filter(optimisticMsg => {
+            if (optimisticMsg.status !== 'sending') return false;
 
-            // Check if we've already processed this message
-            if (processedMessageIds.has(fbMsg._id)) {
-              // Find existing message and maintain its current state
-              const existingMsg = prevMessages.find(m => m._id === fbMsg._id);
-              if (existingMsg) {
-                newMessages.push(existingMsg);
-                return;
-              }
-            }
-
-            // Add new Firebase message
-            newMessages.push({
-              ...fbMsg,
-              status: 'sent'
-            });
-            processedMessageIds.add(fbMsg._id);
+            // Check if this optimistic message has a corresponding Firebase message
+            return !confirmedMessages.some(firebaseMsg => 
+              // Match on content and sender only
+              optimisticMsg.content === firebaseMsg.content && 
+              optimisticMsg.sender === firebaseMsg.sender &&
+              optimisticMsg.receiver === firebaseMsg.receiver
+            );
           });
 
-          // Keep optimistic messages that don't have a Firebase counterpart yet
-          prevMessages.forEach(prevMsg => {
-            if (prevMsg.status === 'sending') {
-              const msgKey = `${prevMsg.content}-${prevMsg.sender}`;
-              const hasFirebaseVersion = seenMessages.has(msgKey);
-              
-              if (!hasFirebaseVersion) {
-                // Only keep optimistic messages that don't have a Firebase version yet
-                const timeDiff = Date.now() - new Date(prevMsg.timestamp).getTime();
-                if (timeDiff < 30000) { // Keep optimistic messages for up to 30 seconds
-                  newMessages.push(prevMsg);
-                }
-              }
-            }
-          });
-
-          // Sort messages by timestamp
-          return newMessages.sort((a, b) => 
+          // Combine and sort all messages by timestamp
+          return [...confirmedMessages, ...pendingMessages].sort((a, b) => 
             new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
           );
         });
@@ -138,11 +114,15 @@ const ChatList = () => {
     
     if (!message || !activeUser?.username) return;
 
+    // Create optimistic message with timestamp as Date object
+    const timestamp = new Date();
     const optimisticMessage = {
-      _id: `optimistic-${Date.now()}`,
+      _id: `${Date.now()}`,
       content: message,
       sender: user._id,
-      timestamp: new Date().toISOString(),
+      contentType:"text",
+      receiver: activeUser._id,
+      timestamp, // Store as Date object for optimistic message
       status: "sending",
     };
 
@@ -162,15 +142,14 @@ const ChatList = () => {
         });
         
         setChatId(JSON.parse(resp).chat._id);
-        router.refresh();
+       
       } catch (error) {
         console.error("Failed to send message:", error);
-        // Handle failed messages if needed
       }
     });
   }, [chatId, activeUser?.username, addOptimisticMessage, user?._id]);
 
-  // Render component remains the same...
+  // Rest of the render code remains the same...
   return (
     <div className="flex flex-col w-full relative h-full">
       <div
