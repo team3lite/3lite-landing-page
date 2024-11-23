@@ -8,19 +8,38 @@ import {
 import { FirebaseChat } from "@/class/firebase_chat";
 import useAuth from "@/hooks/useAuth";
 import { useChatContext } from "@/hooks/useChatContext";
-import { Coins, Mic, Paperclip, Send, Smile, Timer, TriangleAlert } from "lucide-react";
+import {
+  Coins,
+  Mic,
+  Paperclip,
+  Send,
+  Smile,
+  Timer,
+  TriangleAlert,
+} from "lucide-react";
+import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useOptimistic, startTransition, useCallback } from "react";
+import {
+  useEffect,
+  useState,
+  useOptimistic,
+  startTransition,
+  useCallback,
+} from "react";
+import mongoose from "mongoose";
 
 const ChatList = () => {
   const [chatId, setChatId] = useState(null);
   const [messages, setMessages] = useState([]);
   const [_, setIsLoading] = useState(true);
-
-  const router = useRouter();
   const [optimisticMessages, addOptimisticMessage] = useOptimistic(
     messages,
-    (state, newMessage) => [...state, newMessage]
+    (state, newMessage:any) => {
+      // Remove any existing message with the same tempId
+      console.log({ newMessage });
+      const filteredState = state.filter(msg => msg._id !== newMessage.tempId);
+      return [...filteredState, newMessage];
+    }
   );
 
   const { activeUser } = useChatContext();
@@ -63,64 +82,14 @@ const ChatList = () => {
     };
   }, [activeUser?.username]);
 
-  // Improved Firebase subscription with smooth transitions
+  // Updated Firebase subscription with proper timestamp handling
   useEffect(() => {
     let unsubscribe = null;
-    let processedMessageIds = new Set();
 
     const setupFirebaseSubscription = async () => {
       if (!chatId) return;
 
-      unsubscribe = FirebaseChat.subscribeToChat(chatId, (updatedMessages) => {
-        setMessages((prevMessages) => {
-          const newMessages = [];
-          const seenMessages = new Set();
-
-          // Process Firebase messages first
-          updatedMessages.forEach(fbMsg => {
-            const msgKey = `${fbMsg.content}-${fbMsg.sender}`;
-            seenMessages.add(msgKey);
-
-            // Check if we've already processed this message
-            if (processedMessageIds.has(fbMsg._id)) {
-              // Find existing message and maintain its current state
-              const existingMsg = prevMessages.find(m => m._id === fbMsg._id);
-              if (existingMsg) {
-                newMessages.push(existingMsg);
-                return;
-              }
-            }
-
-            // Add new Firebase message
-            newMessages.push({
-              ...fbMsg,
-              status: 'sent'
-            });
-            processedMessageIds.add(fbMsg._id);
-          });
-
-          // Keep optimistic messages that don't have a Firebase counterpart yet
-          prevMessages.forEach(prevMsg => {
-            if (prevMsg.status === 'sending') {
-              const msgKey = `${prevMsg.content}-${prevMsg.sender}`;
-              const hasFirebaseVersion = seenMessages.has(msgKey);
-              
-              if (!hasFirebaseVersion) {
-                // Only keep optimistic messages that don't have a Firebase version yet
-                const timeDiff = Date.now() - new Date(prevMsg.timestamp).getTime();
-                if (timeDiff < 30000) { // Keep optimistic messages for up to 30 seconds
-                  newMessages.push(prevMsg);
-                }
-              }
-            }
-          });
-
-          // Sort messages by timestamp
-          return newMessages.sort((a, b) => 
-            new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-          );
-        });
-      });
+      unsubscribe = FirebaseChat.subscribeToChat(chatId, setMessages);
     };
 
     setupFirebaseSubscription();
@@ -132,18 +101,23 @@ const ChatList = () => {
     };
   }, [chatId]);
 
-  const handleSend = useCallback(async () => {
+  const handleSend = async () => {
     const messageInput = document.getElementById("message") as HTMLInputElement;
     const message = messageInput?.value?.trim();
-    
-    if (!message || !activeUser?.username) return;
 
+    if (!message || !activeUser?.username) return;
+    const tempId = new mongoose.Types.ObjectId().toString();
+    // Create optimistic message with timestamp as Date object
+    const timestamp = new Date();
     const optimisticMessage = {
-      _id: `optimistic-${Date.now()}`,
+      _id: tempId,
+      tempId,
       content: message,
       sender: user._id,
-      timestamp: new Date().toISOString(),
-      status: "sending",
+      contentType: "text",
+      receiver: activeUser._id,
+      timestamp, // Store as Date object for optimistic message
+      deliveryStatus: "sending",
     };
 
     // Clear input and add optimistic message immediately
@@ -152,25 +126,24 @@ const ChatList = () => {
 
     startTransition(async () => {
       try {
-        const receiver = await getUserIdFromUsername(activeUser.username);
-        
-        const resp = await addMessage({ 
-          chatId, 
-          sender: user._id, 
-          receiver, 
-          message 
+        const resp = await addMessage({
+          id:tempId,
+          chatId,
+          timestamp,
+          sender: user._id,
+          receiver: activeUser._id,
+          message,
         });
-        
-        setChatId(JSON.parse(resp).chat._id);
-        router.refresh();
+        if (!chatId) {
+          setChatId(JSON.parse(resp).chat._id);
+        }
+      
       } catch (error) {
         console.error("Failed to send message:", error);
-        // Handle failed messages if needed
       }
     });
-  }, [chatId, activeUser?.username, addOptimisticMessage, user?._id]);
+  };
 
-  // Render component remains the same...
   return (
     <div className="flex flex-col w-full relative h-full">
       <div
@@ -180,7 +153,9 @@ const ChatList = () => {
         {optimisticMessages.map((message, i) => (
           <div
             key={message._id || i}
-            className={`flex ${message.sender === user._id ? "justify-end" : ""}`}
+            className={`flex ${
+              message.sender === user._id ? "justify-end" : ""
+            }`}
           >
             <div
               className={`sm:max-w-xs max-w-[90%] ${
@@ -190,10 +165,10 @@ const ChatList = () => {
               <p className="font-suse text-sm">{message.content}</p>
               <p className="text-xs text-gray-500 mt-1 text-right">
                 {new Date(message.timestamp).toLocaleTimeString()}
-                {message.status === 'sending' && (
+                {message.status === "sending" && (
                   <Timer size={12} className="inline-block ml-1" />
                 )}
-                {message.status === 'failed' && (
+                {message.status === "failed" && (
                   <TriangleAlert size={12} className="inline-block ml-1" />
                 )}
               </p>

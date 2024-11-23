@@ -17,7 +17,7 @@ const receiverData: IuserData = {
   username: "receiver",
   walletType: "solflare",
   status: "online",
-    connectionTimestamp: new Date(),
+  connectionTimestamp: new Date(),
   lastSeen: new Date(),
   walletAddress: "receiverwallet",
 };
@@ -32,34 +32,34 @@ const senderData: IuserData = {
 };
 
 describe("Message Model", () => {
-  let replSet: MongoMemoryReplSet|null=null;
+  let replSet: MongoMemoryReplSet | null = null;
   beforeAll(async () => {
     // Create an in-memory MongoDB server
     replSet = await MongoMemoryReplSet.create({
       replSet: { count: 1 }, // Number of members in the replica set
-      
     });
     const uri = replSet.getUri(); // Get the connection URI for the replica set
- // Connect Mongoose with replica set support
+    // Connect Mongoose with replica set support
     await mongoose.connect(uri);
     await replSet.waitUntilRunning();
     // mongoose.set('', true);
-
   });
 
   afterAll(async () => {
     // Disconnect and stop the in-memory server after tests
 
     await mongoose.disconnect();
-    replSet&&await replSet.stop();
+    replSet && (await replSet.stop());
   });
 
   beforeEach(async () => {
     // Clear collections before each test
-    const isPrimary = await mongoose.connection.db.admin().command({ isMaster: 1 });
-if (!isPrimary.ismaster) {
-  throw new Error("Not connected to the primary node");
-}
+    const isPrimary = await mongoose.connection.db
+      .admin()
+      .command({ isMaster: 1 });
+    if (!isPrimary.ismaster) {
+      throw new Error("Not connected to the primary node");
+    }
     await User.deleteMany({});
     await Chat.deleteMany({});
     await Message.deleteMany({});
@@ -70,17 +70,19 @@ if (!isPrimary.ismaster) {
       // Create users
       const sender = await User.createUser(senderData);
       const receiver = await User.create(receiverData);
-      
+
       // Get initial chat count
       const initialChatCount = await Chat.countDocuments();
-      
+
       // Add first message
       const response = await Message.addMessage({
         chatId: null,
         sender: sender._id,
-        receiver: receiver._id, 
+        id: "2",
+        timestamp: new Date(),
+        receiver: receiver._id,
         content: "First message",
-        contentType: "text"
+        contentType: "text",
       });
 
       // Add second message between same users
@@ -88,9 +90,11 @@ if (!isPrimary.ismaster) {
       const response2 = await Message.addMessage({
         chatId: null,
         sender: sender._id,
+        id: "1",
+        timestamp: new Date(),
         receiver: receiver._id,
-        content: "Second message", 
-        contentType: "text"
+        content: "Second message",
+        contentType: "text",
       });
 
       // Get final chat count
@@ -103,7 +107,7 @@ if (!isPrimary.ismaster) {
       expect(response.isNewChat).toBe(true);
       expect(response2.isNewChat).toBe(false);
       expect(response2.chat._id).toEqual(response.chat._id);
-      
+
       // Verify chat has both messages
       const chat = await Chat.findById(response.chat._id);
       expect(chat?.messages).toHaveLength(2);
@@ -127,13 +131,15 @@ if (!isPrimary.ismaster) {
 
       const existingChat = await Chat.createChat({
         type: "private",
-        participants: [sender._id, receiver._id ],
+        participants: [sender._id, receiver._id],
       });
 
       // Add message to existing chat
       const message = await Message.addMessage({
         chatId: existingChat._id.toString(),
         sender: sender._id.toString(),
+        id: "2",
+        timestamp: new Date(),
         receiver: receiver._id.toString(),
         content: "Follow-up message",
         contentType: "text",
@@ -143,7 +149,7 @@ if (!isPrimary.ismaster) {
       expect(message).toBeDefined();
       expect(message.chat._id).toEqual(existingChat._id);
       //   expect(result.isNewChat).toBe(false);
-    },45000);
+    }, 45000);
   });
 
   describe("updateDeliveryStatus method", () => {
@@ -155,13 +161,15 @@ if (!isPrimary.ismaster) {
 
       const chat = await Chat.createChat({
         type: "private",
-        participants: [sender._id,  receiver._id ],
+        participants: [sender._id, receiver._id],
       });
 
       const message = await Message.addMessage({
         chatId: chat._id,
+        id: "2",
+        timestamp: new Date(),
         sender: sender._id,
-        receiver:receiver._id,
+        receiver: receiver._id,
         content: "Test message",
         contentType: "text",
       });
@@ -176,7 +184,7 @@ if (!isPrimary.ismaster) {
       expect(updatedMessage.deliveryStatus).toBe("delivered");
       expect(updatedMessage.deliveredAt).toBeDefined();
       expect(FirebaseChat.syncMessage).toHaveBeenCalled();
-    },45000);
+    }, 45000);
   });
 
   describe("getUnreadCount method", () => {
@@ -188,26 +196,30 @@ if (!isPrimary.ismaster) {
 
       const chat = await Chat.createChat({
         type: "private",
-        participants: [sender._id ,  sender._id ],
+        participants: [sender._id, sender._id],
       });
 
       // Create some unread messages
-   const addmess1= await Message.addMessage( {
+      const addmess1 = await Message.addMessage({
         chatId: chat._id,
-        sender:sender._id,
+        sender: sender._id,
+        id: "1",
+        timestamp: new Date(),
         receiver: receiver._id,
         content: "Unread 1",
         contentType: "text",
-      })
-      const addMes2=await Message.addMessage( {
+      });
+      const addMes2 = await Message.addMessage({
         chatId: chat._id,
-        sender:sender._id,
+        sender: sender._id,
+        id: "2",
+        timestamp: new Date(),
         receiver: receiver._id,
         content: "Unread 3",
         contentType: "text",
-      })
-  //  const [msg1,msg2]=   await Promise.all([addmess1,addMes2])
-  // const message2=await Message.findOne({_id:msg2.message._id})
+      });
+      //  const [msg1,msg2]=   await Promise.all([addmess1,addMes2])
+      // const message2=await Message.findOne({_id:msg2.message._id})
 
       // Get unread count
       const unreadCount = await Message.getUnreadCount(receiver._id.toString());
