@@ -2,7 +2,6 @@
 import { PersonIcon } from "@/(auth)/_components/MobileAuth";
 import GrainyBackground from "@/components/GrainyBackground";
 import SendSol from "@/components/SendSol";
-
 import {
   Tooltip,
   TooltipContent,
@@ -18,27 +17,46 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useChatContext } from "@/hooks/useChatContext";
-import { useWallet } from "@solana/wallet-adapter-react";
 import SideBar from "@/components/Sidebar";
 import { CldImage } from "next-cloudinary";
+import useAuth from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Component({ children }) {
   const [isOpen, setIsOpen] = useState(true);
   const { activeUser } = useChatContext();
-  const { publicKey } = useWallet();
+  const { activeUser: user } = useAuth();
+  const router = useRouter();
+
+  // Handle unauthorized state
+  if (!user) {
+    toast.promise(
+      new Promise((resolve) => {
+        setTimeout(() => {
+          router.push("/");
+          resolve("");
+        }, 2000);
+      }),
+      {
+        loading: "Please connect your wallet...",
+        success: "Please connect your wallet...",
+        error: "Please connect your wallet...",
+      }
+    );
+    return null;
+  }
 
   return (
-    <div className="h-[94vh] sm:h-screen  bg-orange-400 w-full  relative ">
-      <div className="flex h-full relative overflow-hidden  bg-gray-950 text-gray-300">
-        <GrainyBackground className=" h-full  w-full">
+    <div className="h-[94vh] sm:h-screen bg-orange-400 w-full relative">
+      <div className="flex h-full relative overflow-hidden bg-gray-950 text-gray-300">
+        <GrainyBackground className="h-full w-full">
           <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
-          <div className="flex-1 w-full h-full  overflow-hidden flex flex-col ">
-            <div className="p-4  h-[80px] bg-gray-900 flex items-center justify-between">
+          <div className="flex-1 w-full h-full overflow-hidden flex flex-col">
+            <div className="p-4 h-[80px] bg-gray-900 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <ListMinusIcon
-                  onClick={() => {
-                    setIsOpen(true);
-                  }}
+                  onClick={() => setIsOpen(true)}
                   className="sm:hidden"
                 />
                 <div className="bg-orange-400 overflow-hidden backdrop-blur-sm bg-opacity-70 size-10 rounded-full relative">
@@ -46,7 +64,7 @@ export default function Component({ children }) {
                     <PersonIcon className="text-gray-300" />
                   ) : (
                     <CldImage
-                      src={activeUser?.avatar}
+                      src={activeUser.avatar}
                       width={100}
                       height={100}
                       alt="Profile picture"
@@ -58,9 +76,9 @@ export default function Component({ children }) {
                     />
                   )}
                 </div>
-                <div className=" relative">
+                <div className="relative">
                   <h2 className="sm:text-xl text-sm font-bold text-slate-300">
-                    {activeUser?.username ? activeUser.username : "no user"}
+                    {activeUser?.username || "no user"}
                   </h2>
                   <TooltipProvider>
                     <Tooltip>
@@ -72,16 +90,15 @@ export default function Component({ children }) {
                       </TooltipTrigger>
                       <TooltipContent className="p-0">
                         <div className="relative inline-block">
-                          {/* Tooltip */}
-                          <div className="bg-purle-700 border-purple-400 border text-white text-sm rounded-lg shadow-lg  ">
-                            <div className="flex items-center ">
+                          <div className="bg-purle-700 border-purple-400 border text-white text-sm rounded-lg shadow-lg">
+                            <div className="flex items-center">
                               <span className="font-mono p-2 pr-0 text-xs">
                                 {activeUser?.walletAddress}
                               </span>
-                              <div className=" group cursor-pointer p-3 pl-1">
+                              <div className="group cursor-pointer p-3 pl-1">
                                 <Copy
                                   size={16}
-                                  className="ml-2 group-active:stroke-purple-700  stroke-purple-500"
+                                  className="ml-2 group-active:stroke-purple-700 stroke-purple-500"
                                 />
                               </div>
                             </div>

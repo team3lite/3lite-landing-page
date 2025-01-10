@@ -13,18 +13,25 @@ import {
   TriangleAlert,
   Users,
 } from "lucide-react";
-import { useEffect, useState, useOptimistic, startTransition } from "react";
+import {
+  useEffect,
+  useState,
+  useOptimistic,
+  startTransition,
+  useRef,
+} from "react";
 import mongoose from "mongoose";
 
 const ChatList = () => {
   const [chatId, setChatId] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [_, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+
   const [optimisticMessages, addOptimisticMessage] = useOptimistic(
     messages,
     (state, newMessage: any) => {
-      // Remove any existing message with the same tempId
-      console.log({ newMessage });
       const filteredState = state.filter(
         (msg) => msg._id !== newMessage.tempId
       );
@@ -35,15 +42,27 @@ const ChatList = () => {
   const { activeUser } = useChatContext();
   const { activeUser: user } = useAuth();
 
-  // Initialize chat effect remains the same...
+  // Scroll to bottom when messages change
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [optimisticMessages]);
+
+  // Initialize chat
   useEffect(() => {
     let isMounted = true;
 
     const initializeChat = async () => {
+      if (!activeUser?._id || !user?._id) {
+        setIsLoading(false);
+        return;
+      }
+
       try {
         setIsLoading(true);
-
-        if (!activeUser?._id) return;
         const chatData = await getChat(user._id, activeUser._id);
         const parsedChat = JSON.parse(chatData);
 
@@ -70,16 +89,23 @@ const ChatList = () => {
     return () => {
       isMounted = false;
     };
-  }, [activeUser?.username]);
+  }, [activeUser?._id, user?._id]);
 
-  // Updated Firebase subscription with proper timestamp handling
+  // Firebase subscription
   useEffect(() => {
     let unsubscribe = null;
 
     const setupFirebaseSubscription = async () => {
       if (!chatId) return;
 
-      unsubscribe = FirebaseChat.subscribeToChat(chatId, setMessages);
+      try {
+        unsubscribe = FirebaseChat.subscribeToChat(chatId, (newMessages) => {
+          setMessages(newMessages);
+          scrollToBottom();
+        });
+      } catch (error) {
+        console.error("Firebase subscription error:", error);
+      }
     };
 
     setupFirebaseSubscription();
@@ -92,13 +118,14 @@ const ChatList = () => {
   }, [chatId]);
 
   const handleSend = async () => {
-    const messageInput = document.getElementById("message") as HTMLInputElement;
-    const message = messageInput?.value?.trim();
+    if (!inputRef.current || !activeUser?.username) return;
 
-    if (!message || !activeUser?.username) return;
+    const message = inputRef.current.value.trim();
+    if (!message) return;
+
     const tempId = new mongoose.Types.ObjectId().toString();
-    // Create optimistic message with timestamp as Date object
     const timestamp = new Date();
+
     const optimisticMessage = {
       _id: tempId,
       tempId,
@@ -106,12 +133,11 @@ const ChatList = () => {
       sender: user._id,
       contentType: "text",
       receiver: activeUser._id,
-      timestamp, // Store as Date object for optimistic message
+      timestamp,
       deliveryStatus: "sending",
     };
 
-    // Clear input and add optimistic message immediately
-    messageInput.value = "";
+    inputRef.current.value = "";
     addOptimisticMessage(optimisticMessage);
 
     startTransition(async () => {
@@ -124,18 +150,31 @@ const ChatList = () => {
           receiver: activeUser._id,
           message,
         });
+
         if (!chatId) {
-          setChatId(JSON.parse(resp).chat._id);
+          const parsedResp = JSON.parse(resp);
+          setChatId(parsedResp.chat._id);
         }
       } catch (error) {
         console.error("Failed to send message:", error);
+        // Update the optimistic message to show error state
+        const errorMessage = { ...optimisticMessage, deliveryStatus: "failed" };
+        addOptimisticMessage(errorMessage);
       }
     });
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex-1 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-purple-500"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col w-full relative h-full">
-      {!activeUser?._id ? (
+      {!activeUser?.username ? (
         <ChatEmptyState />
       ) : (
         <div
@@ -157,16 +196,20 @@ const ChatList = () => {
                 <p className="font-suse text-sm">{message.content}</p>
                 <p className="text-xs text-gray-500 mt-1 text-right">
                   {new Date(message.timestamp).toLocaleTimeString()}
-                  {message.status === "sending" && (
+                  {message.deliveryStatus === "sending" && (
                     <Timer size={12} className="inline-block ml-1" />
                   )}
-                  {message.status === "failed" && (
-                    <TriangleAlert size={12} className="inline-block ml-1" />
+                  {message.deliveryStatus === "failed" && (
+                    <TriangleAlert
+                      size={12}
+                      className="inline-block ml-1 text-red-500"
+                    />
                   )}
                 </p>
               </div>
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
       )}
 
@@ -176,34 +219,45 @@ const ChatList = () => {
             e.preventDefault();
             handleSend();
           }}
-          id="chatForm"
           className="w-full"
         >
           <div className="flex w-full items-center bg-gray-950 px-3 rounded-full">
             <div className="flex w-fit items-center sm:space-x-2 space-x-2">
-              <button className="sm:p-2 rounded-full hover:bg-gray-700">
+              <button
+                type="button"
+                className="sm:p-2 rounded-full hover:bg-gray-700"
+              >
                 <Smile size={20} className="text-purple-600" />
               </button>
-              <button className="sm:p-2 rounded-full hover:bg-gray-700">
+              <button
+                type="button"
+                className="sm:p-2 rounded-full hover:bg-gray-700"
+              >
                 <Coins size={20} className="text-purple-600" />
               </button>
             </div>
             <input
+              ref={inputRef}
               type="text"
-              id="message"
               autoComplete="off"
               placeholder="Type a message"
               className="flex-1 w-full bg-transparent p-3 focus:outline-none text-gray-300"
             />
             <div className="flex items-center w-fit space-x-2 sm:px-3">
-              <button className="sm:p-2 rounded-full hover:bg-gray-700">
+              <button
+                type="button"
+                className="sm:p-2 rounded-full hover:bg-gray-700"
+              >
                 <Paperclip size={20} className="text-purple-600" />
               </button>
-              <button className="sm:p-2 p-0 rounded-full hidden sm:inline hover:bg-gray-700">
+              <button
+                type="button"
+                className="sm:p-2 p-0 rounded-full hidden sm:inline hover:bg-gray-700"
+              >
                 <Mic size={20} className="text-purple-600" />
               </button>
               <button
-                onClick={handleSend}
+                type="submit"
                 className="p-2 rounded-full bg-purple-800 hover:bg-purple-900"
               >
                 <Send size={20} className="text-gray-200" />
@@ -216,18 +270,13 @@ const ChatList = () => {
   );
 };
 
-export default ChatList;
-
 const ChatEmptyState = () => {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center p-8 bg-opacity-5 bg-gray-50">
       <div className="max-w-md w-full flex flex-col items-center text-center space-y-6">
-        {/* Icon Container */}
         <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
           <Users className="w-8 h-8 text-blue-600" />
         </div>
-
-        {/* Text Content */}
         <div className="space-y-2">
           <h3 className="text-xl font-semibold text-gray-200">
             Start a New Conversation
@@ -240,3 +289,5 @@ const ChatEmptyState = () => {
     </div>
   );
 };
+
+export default ChatList;

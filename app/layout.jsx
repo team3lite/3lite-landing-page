@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <AppWalletProvider>{children}</AppWalletProvider>
         </AuthProvider>
-        <Toaster />
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );
