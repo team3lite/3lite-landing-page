@@ -1,14 +1,8 @@
 "use client";
-import PasswordInput from "../_components/CustomPasswordField";
 import Link from "next/link";
-import { PasswordIcon, PersonIcon } from "../_components/MobileAuth";
-import { CircleCheck } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
-import { useState } from "react";
 import WalletConnectionHandler from "@/components/WalletButton";
 
 const Page = () => {
-
   return (
     <>
       <div className="sm:flex w-96  font-Syne  px-12 py-6 rounded-2xl border border-neutral-600 flex-col justify-start items-center gap-3 hidden">
@@ -19,8 +13,7 @@ const Page = () => {
         </div>
 
         <div className=" w-full  flex-col justify-center items-center gap-3 flex">
-        
-            <WalletConnectionHandler/>
+          <WalletConnectionHandler />
           Continue with Solana
         </div>
         <div className="w-full flex justify-center">
@@ -47,11 +40,7 @@ const Page = () => {
             Welcome back, glad to see you again
           </div>
         </div>
-        <div className="self-stretch h-[164px] flex-col justify-start items-center gap-4 flex">
-       
-       
-         
-        </div>
+        <div className="self-stretch h-[164px] flex-col justify-start items-center gap-4 flex"></div>
         <div className="self-stretch px-20 py-4 bg-[#c8497f] rounded-xl justify-center items-center gap-2 inline-flex">
           <Link
             href="/chat"

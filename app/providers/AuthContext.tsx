@@ -4,11 +4,12 @@ import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null);
 export type UserDetails = {
-  _id:string;
+  _id: string;
   username: string;
   walletAddress: string;
-  avatar?: string;
+  avatar: string;
   walletType: string;
+  connectionTimestamp?: Date;
 };
 export const AuthProvider = ({ children }) => {
   const [activeUser, setActiveUser] = useState(null);
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     setActiveUser(user);
     localStorage.setItem("3liteuser", JSON.stringify(user));
   };
-  console.log(activeUser)
+  console.log(activeUser);
 
   useEffect(() => {
     const user = localStorage.getItem("3liteuser");

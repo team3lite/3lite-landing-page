@@ -16,6 +16,7 @@ import {
   Smile,
   Timer,
   TriangleAlert,
+  Users,
 } from "lucide-react";
 import { nanoid } from "nanoid";
 import { useRouter } from "next/navigation";
@@ -34,10 +35,12 @@ const ChatList = () => {
   const [_, setIsLoading] = useState(true);
   const [optimisticMessages, addOptimisticMessage] = useOptimistic(
     messages,
-    (state, newMessage:any) => {
+    (state, newMessage: any) => {
       // Remove any existing message with the same tempId
       console.log({ newMessage });
-      const filteredState = state.filter(msg => msg._id !== newMessage.tempId);
+      const filteredState = state.filter(
+        (msg) => msg._id !== newMessage.tempId
+      );
       return [...filteredState, newMessage];
     }
   );
@@ -127,7 +130,7 @@ const ChatList = () => {
     startTransition(async () => {
       try {
         const resp = await addMessage({
-          id:tempId,
+          id: tempId,
           chatId,
           timestamp,
           sender: user._id,
@@ -137,7 +140,6 @@ const ChatList = () => {
         if (!chatId) {
           setChatId(JSON.parse(resp).chat._id);
         }
-      
       } catch (error) {
         console.error("Failed to send message:", error);
       }
@@ -146,36 +148,41 @@ const ChatList = () => {
 
   return (
     <div className="flex flex-col w-full relative h-full">
-      <div
-        id="chatContainer"
-        className="flex-1 flex hide-scrollbar flex-col h-full overflow-hidden relative overflow-y-auto p-4 space-y-2"
-      >
-        {optimisticMessages.map((message, i) => (
-          <div
-            key={message._id || i}
-            className={`flex ${
-              message.sender === user._id ? "justify-end" : ""
-            }`}
-          >
+      {!activeUser?._id ? (
+        <ChatEmptyState />
+      ) : (
+        <div
+          id="chatContainer"
+          className="flex-1 flex hide-scrollbar flex-col h-full overflow-hidden relative overflow-y-auto p-4 space-y-2"
+        >
+          {optimisticMessages.map((message, i) => (
             <div
-              className={`sm:max-w-xs max-w-[90%] ${
-                message.sender === user._id ? "bg-purple-900" : "bg-gray-800"
-              } rounded-lg p-3`}
+              key={message._id || i}
+              className={`flex ${
+                message.sender === user._id ? "justify-end" : ""
+              }`}
             >
-              <p className="font-suse text-sm">{message.content}</p>
-              <p className="text-xs text-gray-500 mt-1 text-right">
-                {new Date(message.timestamp).toLocaleTimeString()}
-                {message.status === "sending" && (
-                  <Timer size={12} className="inline-block ml-1" />
-                )}
-                {message.status === "failed" && (
-                  <TriangleAlert size={12} className="inline-block ml-1" />
-                )}
-              </p>
+              <div
+                className={`sm:max-w-xs max-w-[90%] ${
+                  message.sender === user._id ? "bg-purple-900" : "bg-gray-800"
+                } rounded-lg p-3`}
+              >
+                <p className="font-suse text-sm">{message.content}</p>
+                <p className="text-xs text-gray-500 mt-1 text-right">
+                  {new Date(message.timestamp).toLocaleTimeString()}
+                  {message.status === "sending" && (
+                    <Timer size={12} className="inline-block ml-1" />
+                  )}
+                  {message.status === "failed" && (
+                    <TriangleAlert size={12} className="inline-block ml-1" />
+                  )}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
+
       <div className="p-4 h-fit w-full place-content-center flex pt-1 bg-ray-900">
         <form
           onSubmit={(e) => {
@@ -223,3 +230,26 @@ const ChatList = () => {
 };
 
 export default ChatList;
+
+const ChatEmptyState = () => {
+  return (
+    <div className="h-full w-full flex flex-col items-center justify-center p-8 bg-opacity-5 bg-gray-50">
+      <div className="max-w-md w-full flex flex-col items-center text-center space-y-6">
+        {/* Icon Container */}
+        <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
+          <Users className="w-8 h-8 text-blue-600" />
+        </div>
+
+        {/* Text Content */}
+        <div className="space-y-2">
+          <h3 className="text-xl font-semibold text-gray-200">
+            Start a New Conversation
+          </h3>
+          <p className="text-gray-400">
+            Search for and select a user from your contacts to begin chatting
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};

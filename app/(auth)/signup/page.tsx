@@ -1,16 +1,11 @@
 "use client";
-import PasswordInput from "../_components/CustomPasswordField";
-
 import Link from "next/link";
-import { CircleCheck } from "lucide-react";
-import { PasswordIcon, PersonIcon } from "../_components/MobileAuth";
 import { Switch } from "@/components/ui/switch";
 
 import { useRouter } from "next/navigation";
 import WalletConnectionHandler from "@/components/WalletButton";
 const Page = () => {
   const router = useRouter();
-
 
   return (
     <>
@@ -20,10 +15,9 @@ const Page = () => {
             Start using 3Lite
           </div>
         </div>
-       
+
         <div className=" w-full  flex-col justify-center items-center gap-3 flex">
-        <WalletConnectionHandler/>
-    
+          <WalletConnectionHandler />
         </div>
         <div className="w-full flex justify-center">
           <div className="w-fit ">
@@ -50,7 +44,6 @@ const Page = () => {
           </div>
         </div>
         <div className="self-stretch h-[164px] flex-col justify-start items-center gap-4 flex">
-        
           <div className="self-stretch justify-between items-center inline-flex">
             <div className="text-[#858dab] text-sm font-medium font-['Inter'] leading-normal tracking-tight">
               Remember password

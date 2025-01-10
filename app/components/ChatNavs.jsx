@@ -16,16 +16,17 @@ import {
   Workflow,
   ListMinusIcon,
 } from "lucide-react";
-import {  useState } from "react";
+import { useState } from "react";
 import { useChatContext } from "@/hooks/useChatContext";
 import { useWallet } from "@solana/wallet-adapter-react";
 import SideBar from "@/components/Sidebar";
-import useAuth from "@/hooks/useAuth";
+import { CldImage } from "next-cloudinary";
 
 export default function Component({ children }) {
   const [isOpen, setIsOpen] = useState(true);
   const { activeUser } = useChatContext();
   const { publicKey } = useWallet();
+
   return (
     <div className="h-[94vh] sm:h-screen  bg-orange-400 w-full  relative ">
       <div className="flex h-full relative overflow-hidden  bg-gray-950 text-gray-300">
@@ -40,12 +41,26 @@ export default function Component({ children }) {
                   }}
                   className="sm:hidden"
                 />
-                <div className="bg-orange-400 backdrop-blur-sm bg-opacity-70 size-10 rounded-full p-2">
-                  <PersonIcon className="size-full fill-orange-700 rounded-full text-white stroke-white" />
+                <div className="bg-orange-400 overflow-hidden backdrop-blur-sm bg-opacity-70 size-10 rounded-full relative">
+                  {!activeUser?.avatar ? (
+                    <PersonIcon className="text-gray-300" />
+                  ) : (
+                    <CldImage
+                      src={activeUser?.avatar}
+                      width={100}
+                      height={100}
+                      alt="Profile picture"
+                      className="object-cover"
+                      crop="thumb"
+                      gravity="face"
+                      quality="auto"
+                      format="auto"
+                    />
+                  )}
                 </div>
                 <div className=" relative">
                   <h2 className="sm:text-xl text-sm font-bold text-slate-300">
-                    {activeUser?.username?activeUser.username:"no user"}
+                    {activeUser?.username ? activeUser.username : "no user"}
                   </h2>
                   <TooltipProvider>
                     <Tooltip>

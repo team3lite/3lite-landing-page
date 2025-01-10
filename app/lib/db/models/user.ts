@@ -1,5 +1,3 @@
-
-
 import mongoose, { Model } from "mongoose";
 import bcrypt from "bcrypt";
 
@@ -7,18 +5,17 @@ export interface Users extends Document {
   _id: string;
   walletAddress: string;
   avatar?: string;
-  status: 'online' | 'offline';
+  status: "online" | "offline";
   lastSeen: Date;
   username: string;
   connectionTimestamp: Date;
-  walletType:string;
-  sentMessages: Array<mongoose.Types.ObjectId>;  // Messages sent by user
-  receivedMessages: Array<mongoose.Types.ObjectId>;  // Messages received by user
+  walletType: string;
+  sentMessages: Array<mongoose.Types.ObjectId>; // Messages sent by user
+  receivedMessages: Array<mongoose.Types.ObjectId>; // Messages received by user
   chats: Array<mongoose.Types.ObjectId>;
   created_at: Date;
   updated_at: Date;
 }
-
 
 export type ModelId = mongoose.Types.ObjectId | string;
 // Define shared interfaces for both models
@@ -29,10 +26,9 @@ export interface UserReference {
   avatar?: string;
 }
 
-
 export interface UserModel extends Model<Users> {
   createUser(data: Partial<Users>): Promise<Users>;
-  usernameContains(data:{regex: string}): Promise<Users[] | Error>;
+  usernameContains(data: { regex: string }): Promise<Users[] | Error>;
   validateLogin(data: {
     username: string;
     walletAddress: string;
@@ -41,9 +37,8 @@ export interface UserModel extends Model<Users> {
     walletAddress: string;
     username: string;
   }): Promise<Users>;
-  getUsersFromRegex(data: {
-    regex: string;
-  }): Promise<Users[]>;
+  getUsersFromRegex(data: { regex: string }): Promise<Users[]>;
+  findByWalletAddress(walletAddress: string): Promise<Users>;
 }
 
 // User Schema
@@ -65,33 +60,39 @@ const UserSchema = new mongoose.Schema<Users, UserModel>(
       required: true,
     },
 
-    walletAddress: { 
-      type: String, 
-       required:  [true, "Please provide a valid wallet "], 
-       unique: true
+    walletAddress: {
+      type: String,
+      required: [true, "Please provide a valid wallet "],
+      unique: true,
     },
     avatar: String,
-    status: { 
-      type: String, 
-      enum: ['online', 'offline'], 
-      default: 'offline' 
+    status: {
+      type: String,
+      enum: ["online", "offline"],
+      default: "offline",
     },
-    lastSeen: { 
-      type: Date, 
-      default: Date.now 
+    lastSeen: {
+      type: Date,
+      default: Date.now,
     },
-    sentMessages: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Message'
-    }],
-    receivedMessages: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Message'
-    }],
-    chats: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Chat'
-    }]
+    sentMessages: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Message",
+      },
+    ],
+    receivedMessages: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Message",
+      },
+    ],
+    chats: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Chat",
+      },
+    ],
   },
   {
     timestamps: {
@@ -101,52 +102,49 @@ const UserSchema = new mongoose.Schema<Users, UserModel>(
   }
 );
 
-
-
 // Add the static method properly
-UserSchema.static('getUsersFromRegex', async function(data: { regex: string }): Promise<Users[]> {
-  const { regex } = data;
-  try {
-    const users = await this.find({
-      username: { $regex: regex, $options: 'i' }  // Added case-insensitive option
-    }).exec();
-    return users;
-  } catch (error) {
-    console.error("Error in getUsersFromRegex:", error);
-    throw error;
+UserSchema.static(
+  "getUsersFromRegex",
+  async function (data: { regex: string }): Promise<Users[]> {
+    const { regex } = data;
+    try {
+      const users = await this.find({
+        username: { $regex: regex, $options: "i" }, // Added case-insensitive option
+      }).exec();
+      return users;
+    } catch (error) {
+      console.error("Error in getUsersFromRegex:", error);
+      throw error;
+    }
   }
-});
+);
 // Static methods
 UserSchema.statics.createUser = async function (data: Partial<Users>) {
-  const { walletAddress, username, walletType, connectionTimestamp} = data;
+  const { walletAddress, username, walletType, connectionTimestamp } = data;
 
   // Validate required fields
   if (!walletAddress || !username || !walletType || !connectionTimestamp) {
     throw new Error("Please provide all required fields");
   }
-  
 
   //
   const existingUsernameWithDifferentWallet = await this.findOne({
     username,
     walletAddress: { $ne: walletAddress },
   });
-  if(existingUsernameWithDifferentWallet) {
+  if (existingUsernameWithDifferentWallet) {
     throw new Error("Username already exists");
   }
   //if username and wallet addressexist just update the connection time
   const existingUser = await this.findOne({
     walletAddress,
-    username
+    username,
   });
-  if(existingUser) {
+  if (existingUser) {
     existingUser.connectionTimestamp = connectionTimestamp;
     await existingUser.save();
     return existingUser;
   }
-
-
-  
 
   return this.create({
     ...data,
@@ -154,35 +152,40 @@ UserSchema.statics.createUser = async function (data: Partial<Users>) {
   });
 };
 
+UserSchema.statics.findByWalletAddress = async function (
+  walletAddress: string
+): Promise<Users> {
+  const user = await this.findOne({ walletAddress });
+  if (!user) {
+    return null;
+  }
+  return user;
+};
+
 UserSchema.statics.validateLogin = async function (data: {
   walletAddress: string;
   username: string;
-}):Promise<Users> {
-  
-  console.log({data})
+}): Promise<Users> {
+  console.log({ data });
   const { walletAddress, username } = data;
   if (!walletAddress || !username) {
     throw new Error("Please provide all required fields");
   }
-  
 
   const user = await this.findOne({
-    walletAddress
+    walletAddress,
   });
 
-  console.log({found:user});
-  
+  console.log({ found: user });
+
   if (!user) {
     throw new Error("Invalid credentials");
   }
-  const isValidWallet = walletAddress== user.walletAddress;
+  const isValidWallet = walletAddress == user.walletAddress;
   const isValidUsername = username == user.username;
-  if(!isValidWallet || !isValidUsername) {
+  if (!isValidWallet || !isValidUsername) {
     throw new Error("Invalid credentials");
   }
-
-
-
 
   return user;
 };
@@ -193,7 +196,7 @@ UserSchema.statics.findByWalletAddressAndUsername = async function ({
 }: {
   walletAddress: string;
   username: string;
-}):Promise<Users> {
+}): Promise<Users> {
   const walletExist = await this.findOne({ walletAddress });
   if (!walletExist) {
     throw new Error("walletExist does not exist");
@@ -206,11 +209,7 @@ UserSchema.statics.findByWalletAddressAndUsername = async function ({
   return walletExist;
 };
 
-UserSchema.statics.CreateOrUp
+UserSchema.statics.CreateOrUp;
 
-
-export const User =
-  (mongoose.models.User<UserModel> ||
+export const User = (mongoose.models.User<UserModel> ||
   mongoose.model<Users, UserModel>("User", UserSchema)) as UserModel;
-
-

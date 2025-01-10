@@ -2,7 +2,15 @@
 
 import { PersonIcon } from "@/(auth)/_components/MobileAuth";
 import { Button } from "@/components/ui/button";
-import { Settings, User, LogOut, MoreVertical, Home, X, RotateCw } from "lucide-react";
+import {
+  Settings,
+  User,
+  LogOut,
+  MoreVertical,
+  Home,
+  X,
+  RotateCw,
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
@@ -10,45 +18,40 @@ import { useChatContext } from "@/hooks/useChatContext";
 import SideBarChat from "@/components/SidebarChat";
 import { ScrollArea } from "./ui/scroll-area";
 import { getChats, getUsersFromRegex } from "@/actions/dbFunctions";
-
+import { CldImage } from "next-cloudinary";
 import { useDebouncedCallback } from "use-debounce";
 
 import useAuth from "@/hooks/useAuth";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { activeUser, setActiveUser } = useChatContext();
-  const {activeUser:user}=useAuth()
+  const { activeUser: user } = useAuth();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [currChats, setCurrChats] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  const debounced = useDebouncedCallback(
-    async (userRegex) => {
-      setIsFetching(true);
-      setSearchResults([]);
-       getUsersFromRegex(userRegex)
-        .then((users) => {
-          console.log("userrrr",user)
-          console.log(JSON.parse(users),
-          user?._id,"sss"
-        )
-        if(!user?._id){
+  const debounced = useDebouncedCallback(async (userRegex) => {
+    setIsFetching(true);
+    setSearchResults([]);
+    getUsersFromRegex(userRegex)
+      .then((users) => {
+        console.log("userrrr", user);
+        console.log(JSON.parse(users), user?._id, "sss");
+        if (!user?._id) {
           setIsFetching(false);
-          return
+          return;
         }
-          const parsedUsers = JSON.parse(users).filter(
-            (thisUser) => thisUser._id.toString() !== user._id
-          );
-          setIsFetching(false);
-          setSearchResults(parsedUsers);
-        })
-        .catch((error) => {
-          console.log({ error });
-        });
-    },
-    300
-  );
+        const parsedUsers = JSON.parse(users).filter(
+          (thisUser) => thisUser._id.toString() !== user._id
+        );
+        setIsFetching(false);
+        setSearchResults(parsedUsers);
+      })
+      .catch((error) => {
+        console.log({ error });
+      });
+  }, 300);
 
   const handleType = async (userRegex) => {
     setSearchQuery(userRegex);
@@ -58,10 +61,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const getAllChats = async () => {
     const chats = await getChats(user?._id);
-    setActiveUser(JSON.parse(chats)[0])
-    console.log(JSON.parse(chats))
+    setActiveUser(JSON.parse(chats)[0]);
+    console.log(JSON.parse(chats));
     setCurrChats(JSON.parse(chats));
-  }
+  };
 
   useEffect(() => {
     (async () => {
@@ -109,33 +112,34 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               <h2 className="text-md font-semibold tracking-tight">
                 Current Chats
               </h2>
-              <button 
-                onClick={() => getAllChats()} 
+              <button
+                onClick={() => getAllChats()}
                 className="p-2 rounded-full hover:bg-gray-800"
               >
-                <RotateCw size={18}/>
+                <RotateCw size={18} />
               </button>
             </div>
             <ScrollArea className="h-[calc(100vh-180px)]">
               <div className="space-y-2 pr-2">
                 {currChats.length > 0 ? (
                   currChats.map((chat, id) => (
-                    <ChatItem 
-                      key={id} 
-                      setActiveUser={setActiveUser} 
-                      user={chat.participants.filter(
-                        (thisUser) => thisUser._id.toString() !== user._id
-                      )[0]} 
+                    <ChatItem
+                      key={id}
+                      setActiveUser={setActiveUser}
+                      user={
+                        chat.participants.filter(
+                          (thisUser) => thisUser._id.toString() !== user._id
+                        )[0]
+                      }
                     />
                   ))
                 ) : (
                   <div className=" items-baseline gap-2 flex px-6 mt-4">
-
-                  {/* <p className="text-left text-gray-500">No chats yet</p> */}
-                  {/* search to get users */}
-                  <p  className="text-left  text-gray-500">
-                    search for users to chat with
-                  </p>
+                    {/* <p className="text-left text-gray-500">No chats yet</p> */}
+                    {/* search to get users */}
+                    <p className="text-left  text-gray-500">
+                      search for users to chat with
+                    </p>
                   </div>
                 )}
               </div>
@@ -148,11 +152,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             </h2>
             <ScrollArea className="h-[calc(100vh-220px)]">
               {searchResults.map((user, i) => (
-                <ChatItem 
-                  key={i} 
-                  setActiveUser={setActiveUser} 
-                  user={user} 
-                />
+                <ChatItem key={i} setActiveUser={setActiveUser} user={user} />
               ))}
             </ScrollArea>
           </>
@@ -166,15 +166,28 @@ export default Sidebar;
 
 // Rest of the component remains the same...
 
-const ChatItem = ({ user,setActiveUser }) => {
-console.log({user:user?.username})
+const ChatItem = ({ user, setActiveUser }) => {
+  console.log({ user: user?.username });
   const handleClick = () => {
     setActiveUser(user);
-  }
+  };
   return (
-    <div onClick={handleClick}  className="flex items-center p-4 gap-3 hover:bg-opacity-80 cursor-pointer">
-      <div className="bg-orange-400 backdrop-blur-sm bg-opacity-70 size-10 rounded-full p-2">
-        <PersonIcon className="size-full fill-orange-700 rounded-full text-white stroke-white" />
+    <div
+      onClick={handleClick}
+      className="flex items-center p-4 gap-3 hover:bg-opacity-80 cursor-pointer"
+    >
+      <div className="bg-orange-400 overflow-hidden backdrop-blur-sm bg-opacity-70 size-10 rounded-full relative">
+        <CldImage
+          src={user.avatar}
+          width={100}
+          height={100}
+          alt="Profile picture"
+          className="object-cover"
+          crop="thumb"
+          gravity="face"
+          quality="auto"
+          format="auto"
+        />
       </div>
       <div className="flex-1">
         <div className="flex justify-between items-baseline">
