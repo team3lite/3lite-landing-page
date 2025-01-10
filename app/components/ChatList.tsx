@@ -1,10 +1,5 @@
 "use client";
-import {
-  addMessage,
-  getChat,
-  getChats,
-  getUserIdFromUsername,
-} from "@/actions/dbFunctions";
+import { addMessage, getChat } from "@/actions/dbFunctions";
 import { FirebaseChat } from "@/class/firebase_chat";
 import useAuth from "@/hooks/useAuth";
 import { useChatContext } from "@/hooks/useChatContext";
@@ -18,15 +13,7 @@ import {
   TriangleAlert,
   Users,
 } from "lucide-react";
-import { nanoid } from "nanoid";
-import { useRouter } from "next/navigation";
-import {
-  useEffect,
-  useState,
-  useOptimistic,
-  startTransition,
-  useCallback,
-} from "react";
+import { useEffect, useState, useOptimistic, startTransition } from "react";
 import mongoose from "mongoose";
 
 const ChatList = () => {
