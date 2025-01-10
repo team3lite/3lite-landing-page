@@ -73,12 +73,12 @@ export default function Component({ children }) {
                       <TooltipContent className="p-0">
                         <div className="relative inline-block">
                           {/* Tooltip */}
-                          <div className="bg-purle-700 border-purple-400 border text-white text-sm rounded-lg shadow-lg  max-w-xs">
+                          <div className="bg-purle-700 border-purple-400 border text-white text-sm rounded-lg shadow-lg  ">
                             <div className="flex items-center ">
                               <span className="font-mono p-2 pr-0 text-xs">
-                                {publicKey?.toBase58().slice(0, 20)}
+                                {activeUser?.walletAddress}
                               </span>
-                              <div className=" group cursor-pointer p-3">
+                              <div className=" group cursor-pointer p-3 pl-1">
                                 <Copy
                                   size={16}
                                   className="ml-2 group-active:stroke-purple-700  stroke-purple-500"
