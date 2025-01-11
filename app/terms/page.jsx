@@ -28,7 +28,6 @@ const TermsOfService = () => {
         2. Google Authentication
       </h2>
       <p className="mb-4">
-        {" "}
         Our App uses Google Authentication (&quot;Google Auth&quot;) to verify
         your identity. You agree to the terms of service provided by Google when
         using Google Auth. We are not responsible for any issues arising from
