@@ -1,12 +1,8 @@
-"use client";
 import Link from "next/link";
 import { Switch } from "@/components/ui/switch";
 
-import { useRouter } from "next/navigation";
 import WalletConnectionHandler from "@/components/WalletButton";
 const Page = () => {
-  const router = useRouter();
-
   return (
     <>
       <div className="sm:flex hidden w-96  font-Syne  px-12 py-6 rounded-2xl border border-neutral-600 flex-col justify-start items-center gap-3 ">

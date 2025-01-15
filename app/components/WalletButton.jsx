@@ -1,5 +1,5 @@
 "use client";
-import { createUser, getUserByWalletAddress } from "@/actions/dbFunctions";
+import { getUserByWalletAddress } from "@/actions/dbFunctions";
 import useAuth from "@/hooks/useAuth";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";

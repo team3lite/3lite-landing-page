@@ -19,33 +19,10 @@ import { useState } from "react";
 import { useChatContext } from "@/hooks/useChatContext";
 import SideBar from "@/components/Sidebar";
 import { CldImage } from "next-cloudinary";
-import useAuth from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 export default function Component({ children }) {
   const [isOpen, setIsOpen] = useState(true);
   const { activeUser } = useChatContext();
-  const { activeUser: user } = useAuth();
-  const router = useRouter();
-
-  // Handle unauthorized state
-  if (!user) {
-    toast.promise(
-      new Promise((resolve) => {
-        setTimeout(() => {
-          router.push("/");
-          resolve("");
-        }, 2000);
-      }),
-      {
-        loading: "Please connect your wallet...",
-        success: "Please connect your wallet...",
-        error: "Please connect your wallet...",
-      }
-    );
-    return null;
-  }
 
   return (
     <div className="h-[94vh] sm:h-screen bg-orange-400 w-full relative">

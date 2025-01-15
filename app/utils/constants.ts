@@ -13,7 +13,7 @@ import cardTransparentIcon from "../assets/images/perks/card-transparent-icon.pn
 export const navLinks = [
   {
     name: "Home",
-    link: "#home",
+    link: "/",
     icon: Home,
   },
   {

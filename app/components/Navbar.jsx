@@ -13,15 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu, X, Home, Activity, Layers, Users, Lock } from "lucide-react";
-
-const menuItems = [
-  { icon: Home, label: "Dashboard" },
-  { icon: Activity, label: "Transactions" },
-  { icon: Layers, label: "Smart Contracts" },
-  { icon: Users, label: "Network" },
-  { icon: Lock, label: "Security" },
-];
+import { Menu } from "lucide-react";
 
 const Navbar = () => {
   return (
